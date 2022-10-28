@@ -11,6 +11,7 @@
     width: 722px;
     height: 244px;
     align-self: flex-end;
+    overflow: hidden;
 }
 
 .promo_text {

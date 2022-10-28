@@ -8,14 +8,16 @@ function Techs () {
             <h3 className='subtittle_techs'>На курсе веб-разработки мы освоили технологии, которые применили<br/> в дипломном проекте.</h3>
 
             <div className='gridContainer_techs'>
-                  <p className="grid_text grid_text_blue">1 неделя</p>
-                  <p className="grid_text grid_text_gray">4 недели</p>
-                  <p className="grid_text_transparent">Back-end</p>
-                  <p className="grid_text_transparent">Front-end</p>
+                  <p className="grid_text grid_text_techs">HTML</p>
+                  <p className="grid_text grid_text_techs">CSS</p>
+                  <p className="grid_text grid_text_techs">JS</p>
+                  <p className="grid_text grid_text_techs">React</p>
+                  <p className="grid_text grid_text_techs">Git</p>
+                  <p className="grid_text grid_text_techs">Express.js</p>
+                  <p className="grid_text grid_text_techs">mongoDB</p>
             </div>
       </div>    
     );
   }
   
   export default Techs;
-  

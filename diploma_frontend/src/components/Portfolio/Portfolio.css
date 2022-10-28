@@ -1,0 +1,67 @@
+.container_portfolio {
+    margin: 0;
+    padding: 100px 70px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.portfolio_info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 90px;
+}
+
+.tittle_portfolio {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 40px;
+    margin: 0;
+    padding-bottom: 16px;
+}
+
+.subtittle_portfolio {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+    margin: 0;
+    padding-bottom: 20px;
+}
+
+.text_portfolio {
+    width: 100%;
+    max-width: 364px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    margin: 0;
+    padding-bottom: 87px;
+}
+
+.github_portfolio {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+    text-decoration: none;
+}
+
+.portfolioPhoto {
+    width: 255px;
+    height: 307px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.subtittle_transparent {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    color: #A0A0A0;
+    margin: 0;
+    padding-bottom: 50px;
+}

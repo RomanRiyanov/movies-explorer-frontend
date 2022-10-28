@@ -2,6 +2,7 @@ import Header from "../Header/Header.js";
 import Promo from "../Promo/Promo.js";
 import AboutProject from "../AboutProject/AboutProject.js";
 import Techs from "../Techs/Techs.js";
+import Portfolio from "../Portfolio/Portfolio.js";
 
 function Main() {
     return (
@@ -10,6 +11,7 @@ function Main() {
           <Promo />
           <AboutProject />
           <Techs />
+          <Portfolio />
         </div>
     );
   }
