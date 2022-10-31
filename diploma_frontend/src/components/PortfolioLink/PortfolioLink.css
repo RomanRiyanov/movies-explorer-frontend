@@ -1,10 +1,10 @@
-.container_portfolioLink {
+.container__portfolioLink {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.tittle_portfolioLink {
+.tittle__portfolioLink {
     font-style: normal;
     font-weight: 400;
     font-size: 28px;
@@ -26,7 +26,7 @@
     line-height: 60px;
 }
 
-.portfolio_line {
+.portfolio__line {
     height: 1px;
     background: #E6E6E6;
     margin: 0 0 20px;

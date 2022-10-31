@@ -1,9 +1,9 @@
-.container_landingTittle {
+.container__landingTittle {
     display: flex;
     flex-direction: column;
 }
 
-.tittle_about {
+.tittle__about {
     font-style: normal;
     font-weight: 400;
     font-size: 22px;
@@ -13,7 +13,7 @@
     padding-bottom: 23px;
 }
 
-.tittle_line {
+.tittle__line {
     height: 1px;
     background: black;
     margin: 0 0 70px;

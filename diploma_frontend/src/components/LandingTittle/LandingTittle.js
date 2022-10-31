@@ -1,8 +1,8 @@
-function LandingTittle({tittle_text}) {
+function LandingTittle({tittle__text}) {
     return (
-      <div className="container_landingTittle">
-            <h2 className='tittle_about'>{tittle_text}</h2>
-            <div className='tittle_line'></div>
+      <div className="container__landingTittle">
+            <h2 className='tittle__about'>{tittle__text}</h2>
+            <div className='tittle__line'></div>
       </div>    
     );
   }

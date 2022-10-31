@@ -1,0 +1,40 @@
+.checkbox_custom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.checkbox__container {
+  display: flex;
+  box-shadow: 0px 4px 4px rgba(50, 50, 71, 0.08), 0px 4px 8px rgba(50, 50, 71, 0.06);
+  border-radius: 16px;
+  width: 36px;
+  height: 20px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.checkbox__switch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: 2px;
+  background: #2BE080;
+  transition: all 0.5s ease;
+}
+
+.isChecked {
+  background: #F5F5F5;
+  transition: all 0.5s ease;
+  transform: translate(-16px, 0px);
+}
+
+.checkbox__label {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  margin: 0;
+  padding-left: 12px;
+}

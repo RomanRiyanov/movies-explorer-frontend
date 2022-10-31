@@ -1,4 +1,4 @@
-.container_techs {
+.container__techs {
     display: flex;
     flex-direction: column;
     margin: 0;
@@ -8,14 +8,14 @@
     background-color: #F5F5F5;
 }
 
-/* .container_techs {
+/* .container__techs {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 } */
 
-.tittle_techs {
+.tittle__techs {
     font-style: normal;
     font-weight: 400;
     font-size: 50px;
@@ -24,7 +24,7 @@
     padding: 20px 0 26px 0;
 }
 
-.subtittle_techs {
+.subtittle__techs {
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -34,7 +34,7 @@
     text-align: center;
 }
 
-.gridContainer_techs {
+.gridContainer__techs {
     display: grid;
     width: 100%;
     max-width: 690px;
@@ -46,7 +46,7 @@
     margin: auto;
 }
 
-.grid_text_techs {
+.grid__text__techs {
     display: flex;
     justify-content: center;
     align-items: center;

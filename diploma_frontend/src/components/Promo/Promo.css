@@ -1,4 +1,4 @@
-.promo_container {
+.promo__container {
     margin: 0;
     padding: 0 70px 60px 70px;
     background-color: #DDDEE3;
@@ -7,14 +7,14 @@
     justify-content: center;
 }
 
-.promo_logo {
+.promo__logo {
     width: 722px;
     height: 244px;
     align-self: flex-end;
     overflow: hidden;
 }
 
-.promo_text {
+.promo__text {
     margin: 0 0 100px 0;
     padding: 0;
     font-style: normal;

@@ -1,18 +1,19 @@
-.container_portfolio {
+.container__portfolio {
     margin: 0;
-    padding: 100px 70px;
+    padding: 100px 70px 90px;
     width: 100%;
     box-sizing: border-box;
+    background: #FAFAFA;
 }
 
-.portfolio_info {
+.portfolio__info {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding-bottom: 90px;
 }
 
-.tittle_portfolio {
+.tittle__portfolio {
     font-style: normal;
     font-weight: 400;
     font-size: 40px;
@@ -21,7 +22,7 @@
     padding-bottom: 16px;
 }
 
-.subtittle_portfolio {
+.subtittle__portfolio {
     font-weight: 500;
     font-size: 12px;
     line-height: 18px;
@@ -29,7 +30,7 @@
     padding-bottom: 20px;
 }
 
-.text_portfolio {
+.text__portfolio {
     width: 100%;
     max-width: 364px;
     font-style: normal;
@@ -40,7 +41,7 @@
     padding-bottom: 87px;
 }
 
-.github_portfolio {
+.github__portfolio {
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -56,7 +57,7 @@
     border-radius: 10px;
 }
 
-.subtittle_transparent {
+.subtittle__transparent {
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
