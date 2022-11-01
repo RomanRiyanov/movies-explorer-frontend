@@ -5,8 +5,6 @@ import {
     Link,
   } from 'react-router-dom';
 
-
-
 function Header() {
 
   function signOut(){
@@ -34,9 +32,29 @@ function Header() {
                 <div className='header__container header__container_white'>
                   <nav className='nav__container'>
                     <img className='header__logo' src={headerLogoPath} alt='Логотип сайта'/>
-                    <Link onClick={signOut} className='header__link' to='/movies'>Фильмы</Link>
+                    <Link onClick={signOut} className='header__link header__link_bold' to='/movies'>Фильмы</Link>
                     <Link onClick={signOut} className='header__link' to='/saved-movies'>Сохраненные фильмы</Link>
                      <button className='header__link_account'><Link onClick={signOut} className='header__link' to='/profile'>Аккаунт</Link></button>
+                  </nav>
+                </div>
+              </Route>
+              <Route exact path='/saved-movies'>
+                <div className='header__container header__container_white'>
+                  <nav className='nav__container'>
+                    <img className='header__logo' src={headerLogoPath} alt='Логотип сайта'/>
+                    <Link onClick={signOut} className='header__link' to='/movies'>Фильмы</Link>
+                    <Link onClick={signOut} className='header__link header__link_bold' to='/saved-movies'>Сохраненные фильмы</Link>
+                     <button className='header__link_account'><Link onClick={signOut} className='header__link' to='/profile'>Аккаунт</Link></button>
+                  </nav>
+                </div>
+              </Route>
+              <Route exact path='/profile'>
+                <div className='header__container header__container_white'>
+                  <nav className='nav__container'>
+                    <img className='header__logo' src={headerLogoPath} alt='Логотип сайта'/>
+                    <Link onClick={signOut} className='header__link' to='/movies'>Фильмы</Link>
+                    <Link onClick={signOut} className='header__link' to='/saved-movies'>Сохраненные фильмы</Link>
+                     <button className='header__link_account'><Link onClick={signOut} className='header__link header__link_bold' to='/profile'>Аккаунт</Link></button>
                   </nav>
                 </div>
               </Route>

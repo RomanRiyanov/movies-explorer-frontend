@@ -1,0 +1,72 @@
+.moviesCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+}
+
+.moviesCard__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    /* padding: 14px; */
+    text-align: start;
+    height: 68px;
+    width: 100%;
+}
+
+.moviesCard__credits {
+    padding: 14px;
+}
+
+.moviesCard__tittle {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding-bottom: 9px;
+}
+
+.moviesCard__duration {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: #A0A0A0;
+    margin: 0;
+}
+
+.moviesCard__saveButton {
+    margin: 14px;
+    padding: 0px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    text-align: center;
+    background-image: url(../../images/saveButtonTransparent.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #F4F4F4;
+}
+
+.moviesCard__saveButton_active {
+    background-image: url(../../images/saveButtonWhite.svg);
+    background-color: #3456F3;
+}
+
+.moviesCard__saveButton_delete {
+    background-image: url(../../images/saveButtonDelete.svg);
+}
+
+.moviesCard__photo {
+    height: 203px;
+    width: 100%;
+    object-fit: contain;
+}

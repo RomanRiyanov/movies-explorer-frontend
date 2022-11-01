@@ -3,16 +3,16 @@ import SearchForm from "../SearchForm/SearchForm.js";
 import MoviesCardList from "../MoviesCardList/MoviesCardList.js";
 import Footer from "../Footer/Footer.js";
 
-function Movies() {
+function SavedMovies() {
     return (
         <section className="movies__container">
             <Header/>
             <SearchForm/>
-            <MoviesCardList/>
+            <MoviesCardList /*movies={movies}*/ isSavedRoute={true}/>
             <Footer />
         </section>
     );
   }
   
-  export default Movies;
+  export default SavedMovies;
   

@@ -1,0 +1,83 @@
+.profile__container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* height: 100vh; */
+    background: #FFFFFF;
+}
+
+.profile__form {
+    margin: 0 auto;
+    width: 410px;
+}
+
+.profile__input_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.profile__tittle {
+    margin: 74px auto 107px;
+    padding: 0;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+}
+
+.profile__text {
+    /* display: block; */
+    width: 50%;
+    /* margin-left: auto; */
+    margin-right: 10px;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    text-align: left;
+}
+
+.profile__input {
+    /* display: block; */
+    padding: 16px 10px 16px 0;
+    /* width: 365px; */
+    width: 100%;
+    border: none;
+    cursor: text;
+    margin-left: auto;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    align-self: end;
+    text-align: right;
+}
+
+.profile__input::placeholder {
+    color: black;
+}
+
+.profile__input:active {
+    border: none;
+}
+
+.profile__line {
+    width: 100%;
+    height: 1px;
+    background: #E8E8E8;
+    margin: 0;
+}
+
+.profile__link {
+    border: none;
+    background: none;
+    margin: 204px auto 16px;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.profile__link_red {
+    margin: 0 auto;
+    color: red;
+}

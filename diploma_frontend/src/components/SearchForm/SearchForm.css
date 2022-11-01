@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     margin: 0;
-    padding: 80px 70px 50px 70px;
+    padding: 80px 70px 10px 70px;
 }
 
 .searchForm__container {
@@ -20,6 +20,7 @@
     width: 100%;
     height: 50px;
     margin-right: 10px;
+    padding-left: 10px;
     border: none;
     font-style: normal;
 
@@ -43,4 +44,11 @@
     background-image: url(../../images/glass.svg);
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.searchform__line {
+    width: 100%;
+    height: 1px;
+    background: #E8E8E8;
+    margin: 40px 0 0;
 }
