@@ -50,6 +50,7 @@
     font-size: 14px;
     line-height: 17px;
     color: #FFFFFF;
+    cursor: pointer;
     /* box-shadow: none; */
 }
 
@@ -75,3 +76,22 @@
     color: #3456F3;
 }
 
+.register__button:hover {
+    transition: all 0.5s ease;
+    opacity: 0.4;
+}
+
+.register__link:hover {
+    transition: all 0.5s ease;
+    opacity: 0.4;
+}
+
+@media (max-width: 580px) {
+    .register {
+        width: 260px;
+    }
+    .register__link {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

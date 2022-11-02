@@ -2,14 +2,15 @@
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox.js'
 function SearchForm() {
 
-  function onSubmit(){
-    localStorage.removeItem('jwt');
+  function onSubmit(event){
+    event.preventDefault();
+  console.log('отправить фильм на поиск');
   }
 
   function handleChangeFilm() {
 
   }
-  
+
     return (
         <form onSubmit={onSubmit} className="searchForm__form">
             <div className='searchForm__container'>

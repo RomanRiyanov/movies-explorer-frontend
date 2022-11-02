@@ -6,14 +6,18 @@ import {
     Route,
     Switch,
     Link,
+    useHistory
   } from 'react-router-dom';
 
-function Profile() {
+function Profile({onToolButtonClick}) {
 
     const currentUser = useContext(CurrentUserContext);
 
+    const history = useHistory();
+
     function signOut() {
-        console.log('Выйти из аккаунта')
+        console.log('Выйти из аккаунта');
+        history.push('/main');
     };
 
     function editProfile() {
@@ -22,7 +26,7 @@ function Profile() {
 
     return (
         <section className="profile__container">
-            <Header/>
+            <Header onToolButtonClick={onToolButtonClick}/>
                 <h2 className="profile__tittle">Привет, Ромашка!</h2>
                 <form className="profile__form">
                     <div className="profile__input_container">
@@ -36,7 +40,7 @@ function Profile() {
                     </div>
                 </form>
                 <button onClick={editProfile} className='profile__link'>Редактировать</button>
-                <Link onClick={signOut} className='profile__link profile__link_red' to='/sign-in'>Выйти из аккаунта</Link>
+                <Link onClick={signOut} className='profile__link profile__link_red' to='/main'>Выйти из аккаунта</Link>
         </section>
     );
 }

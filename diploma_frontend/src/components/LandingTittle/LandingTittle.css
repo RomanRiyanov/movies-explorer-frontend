@@ -18,3 +18,10 @@
     background: black;
     margin: 0 0 70px;
 }
+
+@media (max-width: 580px) {
+    .tittle__about {
+        font-size: 18px;
+        line-height: 22px;
+    }
+}

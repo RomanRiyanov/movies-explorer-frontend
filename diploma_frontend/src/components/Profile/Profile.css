@@ -77,7 +77,19 @@
     cursor: pointer;
 }
 
+.profile__link:hover {
+    transition: all 0.5s ease;
+    opacity: 0.4;
+}
+
 .profile__link_red {
-    margin: 0 auto;
+    margin: 0 auto 50px;
     color: red;
+}
+
+@media (max-width: 580px) {
+    .profile__form {
+        margin: 0 auto;
+        width: 260px;
+    }
 }

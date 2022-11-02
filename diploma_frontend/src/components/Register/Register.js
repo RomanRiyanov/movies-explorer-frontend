@@ -13,7 +13,7 @@ function Register({onRegister}) {
     const currentUser = useContext(CurrentUserContext);
 
     function signOut() {
-        console.log('Выйти из аккаунта')
+        console.log('Войти в логин')
     };
 
     function handleRegister(event) {

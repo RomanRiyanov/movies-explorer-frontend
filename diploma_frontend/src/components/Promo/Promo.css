@@ -5,13 +5,13 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    overflow: hidden;
 }
 
 .promo__logo {
     width: 722px;
     height: 244px;
     align-self: flex-end;
-    overflow: hidden;
 }
 
 .promo__text {
@@ -21,4 +21,27 @@
     font-weight: 400;
     font-size: 40px;
     line-height: 52px;
+}
+
+@media (max-width: 1023px) {
+    .promo__container {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .promo__logo {
+        width: 680px;
+        height: 230px;
+        align-self: center;
+    }
+}
+
+@media (max-width: 580px) {
+    .promo__container {
+        padding: 180px 10px 60px 10px;
+    }
+    .promo__text {
+        font-size: 31px;
+        line-height: 39px;
+    }
 }

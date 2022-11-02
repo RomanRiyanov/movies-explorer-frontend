@@ -15,7 +15,7 @@
 }
 
 .header__container_white {
-    background-color: #FAFAFA;;
+    background-color: #FAFAFA;
     padding: 0 70px;
     /* padding: 0; */
 }
@@ -37,34 +37,61 @@
 
 .sign__container {
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.signUpLink {
-    background-color: Transparent;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;
-    margin-right: 30px;
+.nav__link {
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
+    text-decoration: none;
+    background-repeat: no-repeat;
+    cursor: pointer;
 }
 
-.signIpLink {
+.nav__link:hover {
+    transition: all 0.5s ease;
+    opacity: 0.8;
+}
+
+.nav__link_signUpLink {
+    /* text-decoration: none; */
+    color: #000000;
+    background-color: Transparent;
+    /* background-repeat: no-repeat;
+    border: none; */
+    /* cursor: pointer; */
+    margin-right: 30px;
+    /* font-style: normal; */
+    /* font-weight: 500;
+    font-size: 12px;
+    line-height: 16px; */
+}
+
+.nav__link_signInLink {
+    /* text-decoration: none; */
+    border: none;
+
     width: 76px;
     height: 32px;
     background-color: #3456F3;
-    background-repeat: no-repeat;
-    border: none;
+    /* background-repeat: no-repeat;
+    border: none; */
     border-radius: 3px;
-    cursor: pointer;
+    /* cursor: pointer; */
     overflow: hidden;
     color: white;
-    font-style: normal;
-    font-weight: 500;
+    /* font-style: normal; */
+    /* font-weight: 500;
     font-size: 12px;
-    line-height: 16px;
+    line-height: 16px; */
+}
+
+.nav__link_signInLink:hover {
+    transition: all 0.5s ease;
+    opacity: 0.8;
 }
 
 .nav__container {
@@ -83,6 +110,11 @@
     line-height: 18px;
 }
 
+.header__link:hover {
+    transition: all 0.5s ease;
+    opacity: 0.8;
+}
+
 .header__link_bold {
     font-weight: 500;
 }
@@ -93,4 +125,57 @@
     border-radius: 20px;
     width: 100px;
     height: 32px;
+}
+
+.header__link_account:hover {
+    transition: all 0.5s ease;
+    opacity: 0.8;
+}
+
+.button__toolPopup {
+    background-image: url(../../images/buttonTool.svg);
+    background-repeat: none;
+    background-position: center;
+    background-color: #FAFAFA;
+    border: none;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 1023px) {
+    .header__container {
+        padding: 0 30px 60px 30px;
+    }
+}
+
+@media (max-width: 580px) {
+    .header__container {
+        padding: 0 14px 18px 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header__link {
+        display: none;
+    }
+    .header__link_account {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) { 
+    .button__toolPopup {
+        display: none;
+    }
 }

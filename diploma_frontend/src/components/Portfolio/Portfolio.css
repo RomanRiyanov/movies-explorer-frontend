@@ -48,6 +48,12 @@
     line-height: 17px;
     color: #000000;
     text-decoration: none;
+    cursor: pointer;
+}
+
+.github__portfolio:hover {
+    transition: all 0.5s ease;
+    opacity: 0.4;
 }
 
 .portfolioPhoto {
@@ -65,4 +71,46 @@
     color: #A0A0A0;
     margin: 0;
     padding-bottom: 50px;
+}
+
+@media (max-width: 1023px) {
+    .container__portfolio {
+        padding: 100px 50px 90px;
+    }
+}
+
+@media (max-width: 580px) {
+    .container__portfolio {
+        padding: 70px 14px;
+    }
+    .portfolio__info {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column-reverse;
+        padding-bottom: 70px;
+    }
+    .portfolioPhoto {
+        width: 292px;
+        height: 352px;
+        margin-bottom: 40px;
+    }
+    .tittle__portfolio {
+        font-size: 30px;
+        line-height: 36px;
+    }
+    .subtittle__portfolio {
+        font-size: 11px;
+        line-height: 16px;
+    }
+    .text__portfolio {
+        font-size: 11px;
+        line-height: 16px;
+        padding-bottom: 40px;
+    }
+    .subtittle__transparent {
+        font-size: 14px;
+        line-height: 20px;
+        padding-bottom: 40px;
+    }
 }

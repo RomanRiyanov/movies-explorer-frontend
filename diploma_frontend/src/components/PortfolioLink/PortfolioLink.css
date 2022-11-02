@@ -24,10 +24,27 @@
     font-weight: 400;
     font-size: 28px;
     line-height: 60px;
+    cursor: pointer;
+}
+
+.arrowLink:hover {
+    transition: all 0.5s ease;
+    opacity: 0.4;
 }
 
 .portfolio__line {
     height: 1px;
     background: #E6E6E6;
     margin: 0 0 20px;
+}
+
+@media (max-width: 580px) {
+    .tittle__portfolioLink {
+        font-size: 18px;
+        line-height: 28px;
+    }
+    .arrowLink {
+        font-size: 18px;
+        line-height: 28px;
+    }
 }

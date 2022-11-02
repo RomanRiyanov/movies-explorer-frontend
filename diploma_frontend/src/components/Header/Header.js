@@ -3,58 +3,46 @@ import {
     Route,
     Switch,
     Link,
+    NavLink,
   } from 'react-router-dom';
 
-function Header() {
+function Header({ onToolButtonClick }) {
 
-  function signOut(){
-    localStorage.removeItem('jwt');
+  function goToFislms(){
+    console.log('идти во вкладку фильмы');
+  }
+
+  function goToSavedFislms(){
+    console.log('идти во вкладку сохраненные фильмы');
   }
   
+  function goToProfile(){
+    console.log('идти во вкладку профиль');
+  }
+
+  function openToolsPopup(){
+    console.log('открыть всплывающее меню');
+    onToolButtonClick();
+  }
     return (
             <Switch>
-              <Route exact path='/'>
-                <div className='header__container'>
-                  <img className='header__logo' src={headerLogoPath} alt='Логотип сайта'/>
-                  <h2 className='header__tittle'>Добро пожаловать!</h2>
-                </div>
-              </Route>
               <Route exact path='/main'>
                 <div className='header__container'>
                   <img className='header__logo' src={headerLogoPath} alt='Логотип сайта'/>
-                  <div className='sign__container'>
-                      <button className='signUpLink'>Регистрация</button>
-                      <button className='signIpLink'>Войти</button>
-                  </div>
-                </div>
-              </Route>
-              <Route exact path='/movies'>
-                <div className='header__container header__container_white'>
-                  <nav className='nav__container'>
-                    <img className='header__logo' src={headerLogoPath} alt='Логотип сайта'/>
-                    <Link onClick={signOut} className='header__link header__link_bold' to='/movies'>Фильмы</Link>
-                    <Link onClick={signOut} className='header__link' to='/saved-movies'>Сохраненные фильмы</Link>
-                     <button className='header__link_account'><Link onClick={signOut} className='header__link' to='/profile'>Аккаунт</Link></button>
+                  <nav className='sign__container'>
+                      <Link className='nav__link nav__link_signUpLink' to='/signup'>Регистрация</Link>
+                      <button className='nav__link_signInLink'><Link className='nav__link nav__link_signInLink' to='/signin'>Войти</Link></button>
                   </nav>
                 </div>
               </Route>
-              <Route exact path='/saved-movies'>
+              <Route path='/'>
                 <div className='header__container header__container_white'>
                   <nav className='nav__container'>
                     <img className='header__logo' src={headerLogoPath} alt='Логотип сайта'/>
-                    <Link onClick={signOut} className='header__link' to='/movies'>Фильмы</Link>
-                    <Link onClick={signOut} className='header__link header__link_bold' to='/saved-movies'>Сохраненные фильмы</Link>
-                     <button className='header__link_account'><Link onClick={signOut} className='header__link' to='/profile'>Аккаунт</Link></button>
-                  </nav>
-                </div>
-              </Route>
-              <Route exact path='/profile'>
-                <div className='header__container header__container_white'>
-                  <nav className='nav__container'>
-                    <img className='header__logo' src={headerLogoPath} alt='Логотип сайта'/>
-                    <Link onClick={signOut} className='header__link' to='/movies'>Фильмы</Link>
-                    <Link onClick={signOut} className='header__link' to='/saved-movies'>Сохраненные фильмы</Link>
-                     <button className='header__link_account'><Link onClick={signOut} className='header__link header__link_bold' to='/profile'>Аккаунт</Link></button>
+                    <NavLink activeClassName='header__link_bold' onClick={goToFislms} className='header__link' to='/movies'>Фильмы</NavLink>
+                    <NavLink activeClassName='header__link_bold' onClick={goToSavedFislms} className='header__link' to='/saved-movies'>Сохраненные фильмы</NavLink>
+                    <button onClick={openToolsPopup} className='button__toolPopup'></button>
+                    <button className='header__link_account'><NavLink activeClassName='header__link_bold' onClick={goToProfile} className='header__link' to='/profile'>Аккаунт</NavLink></button>
                   </nav>
                 </div>
               </Route>

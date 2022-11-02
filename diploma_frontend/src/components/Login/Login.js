@@ -13,12 +13,12 @@ function Login({onLogin}) {
     const currentUser = useContext(CurrentUserContext);
 
     function signOut() {
-        console.log('Выйти из аккаунта')
+        console.log('Переход в регистрацию')
     };
 
     function handleLogin(event) {
         event.preventDefault();
-        return onLogin();
+        onLogin();
     }
 
     return (
