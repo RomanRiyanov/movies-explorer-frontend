@@ -1,4 +1,5 @@
 # movies-explorer-frontend
 The frontend part of the movie app
 
-https://roman.diploma.nomoredomains.icu
+link to figma layout
+https://disk.yandex.kz/d/_6O_6riOKwLqMw
