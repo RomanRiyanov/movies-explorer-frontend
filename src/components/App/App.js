@@ -4,6 +4,7 @@ import {
   Route,
   Switch,
   Link,
+  Redirect,
   useHistory
 } from 'react-router-dom';
 import { CurrentUserContext } from '../context/CurrentUserContext';
@@ -53,6 +54,9 @@ function App() {
       <div className='page'>
       <CurrentUserContext.Provider value={currentUser}>
         <Switch>
+          <Route exact path="/">
+            <Redirect to="/main" />
+          </Route>
           <ProtectedRoute
             onToolButtonClick={openToolPopup}
             exact path="/movies"
