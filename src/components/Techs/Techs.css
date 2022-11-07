@@ -8,13 +8,6 @@
     background-color: #F5F5F5;
 }
 
-/* .container__techs {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-} */
-
 .tittle__techs {
     font-style: normal;
     font-weight: 400;
@@ -44,9 +37,10 @@
     grid-auto-rows: 60px;
     column-gap: 10px;
     margin: 0 auto;
+    padding: 0;
 }
 
-.grid__text__techs {
+.grid__text_techs {
     display: flex;
     justify-content: center;
     align-items: center;

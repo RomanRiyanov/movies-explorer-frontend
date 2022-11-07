@@ -1,15 +1,12 @@
 import React, {useEffect, useState, useContext} from "react";
 import {CurrentUserContext} from '../context/CurrentUserContext';
 
-import Header from "../Header/Header";
 import {
-    Route,
-    Switch,
     Link,
     useHistory
   } from 'react-router-dom';
 
-function Profile({onToolButtonClick}) {
+function Profile() {
 
     const currentUser = useContext(CurrentUserContext);
 
@@ -26,7 +23,6 @@ function Profile({onToolButtonClick}) {
 
     return (
         <section className="profile__container">
-            <Header onToolButtonClick={onToolButtonClick}/>
                 <h2 className="profile__tittle">Привет, Ромашка!</h2>
                 <form className="profile__form">
                     <div className="profile__input_container">
@@ -39,7 +35,7 @@ function Profile({onToolButtonClick}) {
                         <input className="profile__input" name='email_input' placeholder={'yenail@mail.com'}></input>
                     </div>
                 </form>
-                <button onClick={editProfile} className='profile__link'>Редактировать</button>
+                <button type="button" onClick={editProfile} className='profile__link'>Редактировать</button>
                 <Link onClick={signOut} className='profile__link profile__link_red' to='/main'>Выйти из аккаунта</Link>
         </section>
     );

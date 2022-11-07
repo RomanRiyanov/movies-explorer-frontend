@@ -27,24 +27,28 @@ function Header({ onToolButtonClick }) {
     return (
             <Switch>
               <Route exact path='/main'>
-                <div className='header__container'>
+                <section className='header__container'>                  
                   <img className='header__logo' src={headerLogoPath} alt='Логотип сайта'/>
                   <nav className='sign__container'>
                       <Link className='nav__link nav__link_signUpLink' to='/signup'>Регистрация</Link>
-                      <button className='nav__link_signInLink'><Link className='nav__link nav__link_signInLink' to='/signin'>Войти</Link></button>
+                      <button type="button" className='nav__link_signInLink'><Link className='nav__link nav__link_signInLink' to='/signin'>Войти</Link></button>
                   </nav>
-                </div>
+                </section>
               </Route>
               <Route path='/'>
-                <div className='header__container header__container_white'>
+                <section className='header__container header__container_white'>
                   <nav className='nav__container'>
-                    <img className='header__logo' src={headerLogoPath} alt='Логотип сайта'/>
+                    <a href="main"> 
+                      <img className='header__logo' src={headerLogoPath} alt='Логотип сайта'/>
+                    </a>
+
+                    {/* <img className='header__logo' href="#main__container" src={headerLogoPath} alt='Логотип сайта'/> */}
                     <NavLink activeClassName='header__link_bold' onClick={goToFislms} className='header__link' to='/movies'>Фильмы</NavLink>
                     <NavLink activeClassName='header__link_bold' onClick={goToSavedFislms} className='header__link' to='/saved-movies'>Сохраненные фильмы</NavLink>
-                    <button onClick={openToolsPopup} className='button__toolPopup'></button>
-                    <button className='header__link_account'><NavLink activeClassName='header__link_bold' onClick={goToProfile} className='header__link' to='/profile'>Аккаунт</NavLink></button>
+                    <button type="button" onClick={openToolsPopup} className='button__toolPopup'></button>
+                    <button type="button" className='header__link_account'><NavLink activeClassName='header__link_bold' onClick={goToProfile} className='header__link' to='/profile'>Аккаунт</NavLink></button>
                   </nav>
-                </div>
+                </section>
               </Route>
             </Switch>
     );

@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState} from 'react';
 
 function FilterCheckbox() {
 
@@ -9,12 +9,12 @@ function onSwitchCheckbox() {
 };
 
 return (
-      <div className="checkbox_custom">
+      <section className="checkbox_custom">
         <div className="checkbox__container" onClick={onSwitchCheckbox}>
           <div className={`checkbox__switch ${isChecked ? "isChecked" : ""}`}></div>
         </div>
         <p className='checkbox__label'>Короткометражки</p>
-      </div>
+      </section>
     )
 }
 

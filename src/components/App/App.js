@@ -3,7 +3,6 @@ import React, {useEffect, useState} from "react";
 import {
   Route,
   Switch,
-  Link,
   Redirect,
   useHistory
 } from 'react-router-dom';
@@ -17,6 +16,8 @@ import Register from "../Register/Register";
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import ToolMenuPopup from '../ToolMenuPopup/ToolMenuPopup';
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 
 function App() {
@@ -62,21 +63,29 @@ function App() {
             exact path="/movies"
             loggedIn={loggedIn}
             component={Movies}
+            header={Header}
+            footer={Footer}
           />
           <ProtectedRoute
             onToolButtonClick={openToolPopup}
             exact path="/saved-movies"
             loggedIn={loggedIn}
             component={SavedMovies}
+            header={Header}
+            footer={Footer}
           />
           <ProtectedRoute
             onToolButtonClick={openToolPopup}
             exact path="/profile"
             loggedIn={loggedIn}
             component={Profile}
+            header={Header}
+            footer={Footer}
           />
           <Route path='/main'>
+            <Header />
             <Main />
+            <Footer />
           </Route>
           <Route path='/signup'>
               <Register onRegister={onRegister}/>

@@ -4,7 +4,7 @@ import PortfolioPhotoPath from '../../images/Snoop-Dogg-2008.png';
 
 function Portfolio () {
     return (
-      <div className="container__portfolio">
+      <section className="container__portfolio">
             <LandingTittle tittle__text='Студент'/>
             <div className="portfolio__info">
                 <div>
@@ -25,10 +25,18 @@ function Portfolio () {
                 <img className="portfolioPhoto" src={PortfolioPhotoPath} alt='Фото студента Практикума'/>
             </div>
             <h3 className="subtittle__transparent ">Портфолио</h3>
-            <PortfolioLink text='Статичный сайт'/>
-            <PortfolioLink text='Адаптивный сайт'/>
-            <PortfolioLink text='Одностраничное приложение'/>
-      </div>    
+            <ul className="default__linkList">
+                <li>
+                    <PortfolioLink text='Статичный сайт' link='https://github.com/RomanRiyanov/how-to-learn'/>
+                </li>
+                <li>               
+                    <PortfolioLink text='Адаптивный сайт' link='https://romanriyanov.github.io/russian-travel-look/index.html'/>
+                </li>
+                <li>
+                    <PortfolioLink text='Одностраничное приложение' link='https://romanriyanov.github.io/mesto/index.html'/>
+                </li>
+            </ul>
+      </section>    
     );
   }
   

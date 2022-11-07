@@ -1,18 +1,13 @@
 .footer__container {
-    /* display: flex; */
-    /* flex-direction: column;
-    /* justify-content: space-between; */
-    /* align-items: center; */
-    /* width: 100%; */
-    /* background-color: #DDDEE3; */
     margin: 0;
     padding: 0 70px 20px 70px;
     background: #F8F8F8;
-    /* height: 74px; */
-    /* font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px; */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.footer__container_disabled {
+    display: none;
 }
 
 .footer__tittle {

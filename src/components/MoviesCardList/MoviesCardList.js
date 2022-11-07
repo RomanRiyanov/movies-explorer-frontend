@@ -20,7 +20,7 @@ function MoviesCardList({movies, isSavedRoute}) {
                     <MoviesCard/>
                  {/* ))} */}
             </div>
-            <button className='moviesCardList__moreMoviesButton'>Ещё</button>
+            <button type="button" className='moviesCardList__moreMoviesButton'>Ещё</button>
         </section>
     );
   }

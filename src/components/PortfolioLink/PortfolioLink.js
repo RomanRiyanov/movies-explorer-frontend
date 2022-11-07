@@ -1,12 +1,10 @@
-import arrowLinkPath from '../../images/arrowLink.svg'
 
-function PortfolioLink({text}) {
+function PortfolioLink({text, link}) {
     return (
     <div>
         <div className="container__portfolioLink">
-            <h2 className='tittle__portfolioLink'>{text}</h2>
-            {/* <img className='arrowLink' src={arrowLinkPath} alt='Иконка стрелки'/> */}
-            <a className='arrowLink' href=''>&#8599;</a>
+            <a target="_blank" rel="noopener noreferrer" className='tittle__portfolioLink' href={link}>{text}</a>
+            <a target="_blank" rel="noopener noreferrer" className='arrowLink' href={link}>&#8599;</a>
         </div>
         <div className='portfolio__line'></div>
     </div>

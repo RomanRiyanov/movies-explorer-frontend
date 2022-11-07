@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 
 import photoOnePath from '../../images/test_film_1.png';
 const tittle = '33 слова о дизайне';
@@ -32,7 +32,7 @@ function MoviesCard({movies, isSavedRoute}) {
                     <h2 className='moviesCard__tittle'>{tittle}</h2>
                     <p className='moviesCard__duration'>{duration}</p>
                 </div>
-                <button onClick={handleSave} aria-label='Сохранить фильм' className={isSavedRoute ? saveButtonDeleteClassName: saveButtonClassName}></button>
+                <button type="button" onClick={handleSave} aria-label='Сохранить фильм' className={isSavedRoute ? saveButtonDeleteClassName: saveButtonClassName}></button>
             </div>
             <img src={photoOnePath} className='moviesCard__photo' alt='Кадр из фильма'/>
         </section>

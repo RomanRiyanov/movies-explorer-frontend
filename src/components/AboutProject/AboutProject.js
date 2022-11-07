@@ -2,7 +2,7 @@ import LandingTittle from "../LandingTittle/LandingTittle";
 
 function AboutProject() {
     return (
-      <div className="container__about">
+      <section className="container__about">
             <LandingTittle tittle__text='О проекте'/>
             <div className='gridContainer__about'>
                   <p className='grid__text grid__title_text'>Дипломный проект включал 5 этапов</p>
@@ -16,7 +16,7 @@ function AboutProject() {
                   <p className="grid__text grid__text__transparent">Back-end</p>
                   <p className="grid__text grid__text__transparent">Front-end</p>
             </div>
-      </div>    
+      </section>    
     );
   }
   
