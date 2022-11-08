@@ -17,8 +17,8 @@ function Footer() {
             <div className="footer__credits">
                 <p className="footer__text footer__text_copyright">&#9400; 2022</p>
                 <nav className="footer__links">
-                    <a className="footer__text footer__text_link" href="https://practicum.yandex.ru/">Яндекс.Практикум</a>
-                    <a className="footer__text footer__text_link" href="https://github.com/RomanRiyanov">Github</a>
+                    <a target="_blank" rel="noopener noreferrer" className="footer__text footer__text_link" href="https://practicum.yandex.ru/">Яндекс.Практикум</a>
+                    <a target="_blank" rel="noopener noreferrer" className="footer__text footer__text_link" href="https://github.com/RomanRiyanov">Github</a>
                 </nav>
             </div>
           </section>

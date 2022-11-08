@@ -7,11 +7,7 @@ import {
   useHistory
 } from 'react-router-dom';
 import { CurrentUserContext } from '../context/CurrentUserContext';
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Main from "../Main/Main";
-import Movies from '../Movies/Movies'
-import SavedMovies from '../SavedMovies/SavedMovies';
-import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
@@ -55,46 +51,22 @@ function App() {
       <div className='page'>
       <CurrentUserContext.Provider value={currentUser}>
         <Switch>
-          <Route exact path="/">
-            <Redirect to="/main" />
-          </Route>
-          <ProtectedRoute
-            onToolButtonClick={openToolPopup}
-            exact path="/movies"
-            loggedIn={loggedIn}
-            component={Movies}
-            header={Header}
-            footer={Footer}
-          />
-          <ProtectedRoute
-            onToolButtonClick={openToolPopup}
-            exact path="/saved-movies"
-            loggedIn={loggedIn}
-            component={SavedMovies}
-            header={Header}
-            footer={Footer}
-          />
-          <ProtectedRoute
-            onToolButtonClick={openToolPopup}
-            exact path="/profile"
-            loggedIn={loggedIn}
-            component={Profile}
-            header={Header}
-            footer={Footer}
-          />
-          <Route path='/main'>
-            <Header />
-            <Main />
-            <Footer />
-          </Route>
-          <Route path='/signup'>
+          <Route exact path='/signup'>
               <Register onRegister={onRegister}/>
           </Route>
-          <Route path='/signin'>
+
+          <Route exact path='/signin'>
               <Login onLogin={onLogin}/>
           </Route>
-          <Route path="*">
+          
+          <Route exact path='/page_not_found'>
             <PageNotFound />
+          </Route>
+
+          <Route path='/'>
+            <Header onToolButtonClick={openToolPopup} />
+            <Main loggedIn={loggedIn}/>
+            <Footer />
           </Route>
         </Switch>
 

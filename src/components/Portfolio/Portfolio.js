@@ -33,7 +33,7 @@ function Portfolio () {
                     <PortfolioLink text='Адаптивный сайт' link='https://romanriyanov.github.io/russian-travel-look/index.html'/>
                 </li>
                 <li>
-                    <PortfolioLink text='Одностраничное приложение' link='https://romanriyanov.github.io/mesto/index.html'/>
+                    <PortfolioLink text='Одностраничное приложение' link='https://romanriyanov.github.io/react-mesto-auth'/>
                 </li>
             </ul>
       </section>    

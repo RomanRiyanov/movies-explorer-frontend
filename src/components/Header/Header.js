@@ -41,8 +41,6 @@ function Header({ onToolButtonClick }) {
                     <a href="main"> 
                       <img className='header__logo' src={headerLogoPath} alt='Логотип сайта'/>
                     </a>
-
-                    {/* <img className='header__logo' href="#main__container" src={headerLogoPath} alt='Логотип сайта'/> */}
                     <NavLink activeClassName='header__link_bold' onClick={goToFislms} className='header__link' to='/movies'>Фильмы</NavLink>
                     <NavLink activeClassName='header__link_bold' onClick={goToSavedFislms} className='header__link' to='/saved-movies'>Сохраненные фильмы</NavLink>
                     <button type="button" onClick={openToolsPopup} className='button__toolPopup'></button>
