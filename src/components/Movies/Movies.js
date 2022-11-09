@@ -1,11 +1,11 @@
 import SearchForm from "../SearchForm/SearchForm.js";
 import MoviesCardList from "../MoviesCardList/MoviesCardList.js";
 
-function Movies({onToolButtonClick}) {
+function Movies({movies, onMoviesFind, keyword}) {
     return (
         <section className="movies__container">
-            <SearchForm/>
-            <MoviesCardList/>
+            <SearchForm onMoviesFind={onMoviesFind}/>
+            <MoviesCardList movies={movies} keyword={keyword}/>
         </section>
     );
   }

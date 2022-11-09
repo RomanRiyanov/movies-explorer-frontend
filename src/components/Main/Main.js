@@ -25,7 +25,10 @@ import {
 //     );
 //   }
 function Main({
-  loggedIn
+  loggedIn,
+  moviesData,
+  onMoviesFind,
+  keyword
 }) {
   return (
     <Switch>
@@ -44,6 +47,9 @@ function Main({
         exact path="/movies"
         loggedIn={loggedIn}
         component={Movies}
+        movies={moviesData}
+        onMoviesFind={onMoviesFind}
+        keyword={keyword}
       />
       <ProtectedRoute
         exact path="/saved-movies"

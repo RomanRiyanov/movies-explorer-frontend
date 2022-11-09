@@ -15,6 +15,7 @@ import ToolMenuPopup from '../ToolMenuPopup/ToolMenuPopup';
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
+import { moviesApi } from '../../utils/MoviesApi';
 
 function App() {
 
@@ -25,8 +26,26 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(true);
   const [isToolPopupOpen, setToolPopupOpen] = useState(false);
+  const [movies, setMovies] = useState([]);
+  const [keyword, setKeyword] = useState('');
 
   let history = useHistory();
+
+  function handleGetMovies (keywordFromSearch) {
+    console.log('принес в апп ключевое слово ' + keywordFromSearch);
+    setKeyword(keywordFromSearch);
+
+    moviesApi.getMovies()
+      .then((moviesData) => {
+
+        // console.log('moviesData ' + moviesData);
+
+        setMovies(moviesData);
+      })
+      .catch(err => {
+        console.log('Ошибка ' + err)
+      })
+  }
 
   function onRegister() {
     console.log('зарегистрироваться');
@@ -65,7 +84,12 @@ function App() {
 
           <Route path='/'>
             <Header onToolButtonClick={openToolPopup} />
-            <Main loggedIn={loggedIn}/>
+            <Main 
+              loggedIn={loggedIn}
+              moviesData={movies}
+              onMoviesFind={handleGetMovies}
+              keyword={keyword}
+            />
             <Footer />
           </Route>
         </Switch>

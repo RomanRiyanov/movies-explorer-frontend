@@ -44,7 +44,8 @@
 .moviesCard__saveButton {
     margin: 14px;
     padding: 0px;
-    width: 30px;
+    width: 100%;
+    max-width: 30px;
     height: 30px;
     border: none;
     border-radius: 50%;
@@ -73,5 +74,5 @@
 .moviesCard__photo {
     height: 203px;
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
