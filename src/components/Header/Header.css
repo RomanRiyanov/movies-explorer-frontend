@@ -1,0 +1,159 @@
+.header__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #DDDEE3;
+    margin: 0;
+    padding: 30px 70px 60px 70px;
+    height: 74px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    box-sizing: border-box;
+}
+
+.header__container_white {
+    background-color: #FAFAFA;
+    padding: 0 70px;
+}
+
+.header__tittle{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    margin: 0;
+    padding: 40px 0;
+}
+
+.header__logo {
+    width: 38px;
+    height: 38px;
+    padding-right: 28px;
+    cursor: pointer;
+}
+
+.sign__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.nav__link {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    text-decoration: none;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.nav__link:hover {
+    transition: all 0.5s ease;
+    opacity: 0.8;
+}
+
+.nav__link_signUpLink {
+    color: #000000;
+    background-color: Transparent;
+    margin-right: 30px;
+}
+
+.nav__link_signInLink {
+    border: none;
+    width: 76px;
+    height: 32px;
+    background-color: #3456F3;
+    border-radius: 3px;
+    overflow: hidden;
+    color: white;
+}
+
+.nav__link_signInLink:hover {
+    transition: all 0.5s ease;
+    opacity: 0.8;
+}
+
+.nav__container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+}
+
+.header__link {
+    text-decoration: none;
+    color: #000000;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+}
+
+.header__link:hover {
+    transition: all 0.5s ease;
+    opacity: 0.8;
+}
+
+.header__link_bold {
+    font-weight: 500;
+}
+
+.header__link_account {
+    border: none;
+    margin-left: auto;
+    border-radius: 20px;
+    width: 100px;
+    height: 32px;
+}
+
+.header__link_account:hover {
+    transition: all 0.5s ease;
+    opacity: 0.8;
+}
+
+.button__toolPopup {
+    background-image: url(../../images/buttonTool.svg);
+    background-repeat: none;
+    background-position: center;
+    background-color: #FAFAFA;
+    border: none;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+}
+
+@media (max-width: 1023px) {
+    .header__container {
+        padding: 30px 30px 60px 30px;
+    }
+}
+
+@media (max-width: 580px) {
+    .header__container {
+        padding: 30px 14px 18px 14px;
+    }
+    .header__logo {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .header__link {
+        display: none;
+    }
+    .header__link_account {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) { 
+    .button__toolPopup {
+        display: none;
+    }
+}

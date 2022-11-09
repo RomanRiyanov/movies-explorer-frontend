@@ -1,0 +1,53 @@
+.container__portfolioLink {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.tittle__portfolioLink {
+    text-decoration: none;
+    color: black;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 50px;
+    text-align: left;
+    margin: 0;
+    padding-bottom: 19px;
+    cursor: pointer;
+}
+
+.arrowLink {
+    text-decoration: none;
+    color: black;
+    width: 27px;
+    height: 60px;
+    object-fit: contain;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 60px;
+    cursor: pointer;
+}
+
+.arrowLink:hover {
+    transition: all 0.5s ease;
+    opacity: 0.4;
+}
+
+.portfolio__line {
+    height: 1px;
+    background: #E6E6E6;
+    margin: 0 0 20px;
+}
+
+@media (max-width: 580px) {
+    .tittle__portfolioLink {
+        font-size: 18px;
+        line-height: 28px;
+    }
+    .arrowLink {
+        font-size: 18px;
+        line-height: 28px;
+    }
+}

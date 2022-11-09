@@ -1,0 +1,27 @@
+.container__landingTittle {
+    display: flex;
+    flex-direction: column;
+}
+
+.tittle__about {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    text-align: left;
+    margin: 0;
+    padding-bottom: 23px;
+}
+
+.tittle__line {
+    height: 1px;
+    background: black;
+    margin: 0 0 70px;
+}
+
+@media (max-width: 580px) {
+    .tittle__about {
+        font-size: 18px;
+        line-height: 22px;
+    }
+}
