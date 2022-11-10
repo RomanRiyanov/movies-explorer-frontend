@@ -19,7 +19,7 @@ function MoviesCardList({movies, isSavedRoute, keyword, short}) {
 
     useEffect(() => {
         function handleResize() {
-            setTimeout(() => {setWidth(window.innerWidth)}, 1000);
+            setTimeout(() => {setWidth(window.innerWidth)}, 1500);
         }
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
@@ -30,27 +30,27 @@ function MoviesCardList({movies, isSavedRoute, keyword, short}) {
         setCount(count + num);
 
 
+        // setFilteredMoviesLength(filteredMovies.length);
+
+        // console.log(keywordMovies.length);
+        // console.log(filteredMovies.length);
+
+        // if (keywordMovies.length === filteredMovies.length) {
+        //     setMoreButtonDisabled(true);
+        // } else if (keywordMovies.length !== filteredMovies.length) {
+        //     setMoreButtonDisabled(false)
+        // };
+    }
+
+    useEffect(() => {
         setFilteredMoviesLength(filteredMovies.length);
-
-        console.log(keywordMovies.length);
-        console.log(filteredMoviesLength);
-
+        
         if (keywordMovies.length === filteredMoviesLength) {
             setMoreButtonDisabled(true);
         } else if (keywordMovies.length !== filteredMoviesLength) {
             setMoreButtonDisabled(false)
         };
-    }
-
-    // useEffect(() => {
-    //     setFilteredMoviesLength(filteredMovies.length);
-        
-    //     if (keywordMovies.length === filteredMoviesLength) {
-    //         setMoreButtonDisabled(true);
-    //     } else if (keywordMovies.length !== filteredMoviesLength) {
-    //         setMoreButtonDisabled(false)
-    //     };
-    // }, [])
+    }, [keywordMovies])
 
     return (
         <section className='moviesCardList'>
