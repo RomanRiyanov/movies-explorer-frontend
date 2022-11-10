@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 
-function FilterCheckbox() {
+function FilterCheckbox({onShortFolmSelect}) {
 
 const [isChecked, setIsChecked] = useState(false);
 
 function onSwitchCheckbox() {
-    setIsChecked(!isChecked)
+    setIsChecked(!isChecked);
+    onShortFolmSelect(isChecked);
 };
 
 return (

@@ -29,7 +29,7 @@ function MoviesCard({movie, isSavedRoute, keyword}) {
     
     function handleSave() {
         if (isSavedRoute) {
-            console.log('удалить карточку с фильмом')
+            console.log('удалить карточку с фильмом');
         }
         else {
             setMovieSaved(!isMovieSaved);
@@ -38,7 +38,7 @@ function MoviesCard({movie, isSavedRoute, keyword}) {
     }
 
     function handleImageClick() {
-        console.log('card keyword ' + keyword);
+        console.log('пириход на ютубчик');
     }
     useEffect(() => {
         setDuration(hoursAndMinutes());

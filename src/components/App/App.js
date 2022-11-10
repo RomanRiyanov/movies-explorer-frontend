@@ -41,10 +41,14 @@ function App() {
         // console.log('moviesData ' + moviesData);
 
         setMovies(moviesData);
+        
+
       })
       .catch(err => {
         console.log('Ошибка ' + err)
       })
+
+      
   }
 
   function onRegister() {

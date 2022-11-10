@@ -43,6 +43,10 @@
     opacity: 0.4;
 }
 
+.button_inactive {
+    display: none;
+}
+
 @media (max-width: 1180px) {
     .moviesCardList__container {
         grid-template-columns: repeat(2, 339px);
