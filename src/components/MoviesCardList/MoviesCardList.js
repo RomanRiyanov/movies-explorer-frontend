@@ -4,7 +4,6 @@ import { Route, Switch} from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 import { filterFilmByKeyword } from "../../utils/utils/filterFilmByKeyword.js";
 import { filterFilmsByScreenWidth } from "../../utils/utils/filterFilmsByScreenWidth.js";
-// import { filterFilmByIsSaved } from "../../utils/utils/filterFilmByIsSaved.js";
 import { addedFilmCounter } from "../../utils/utils/addedFilmCounter.js";
 
 function MoviesCardList({movies, keyword, short}) {
@@ -16,8 +15,12 @@ function MoviesCardList({movies, keyword, short}) {
     const [isMoreButtonDisabled, setMoreButtonDisabled] = useState(false);
 
     const moreButtonClassName = (isMoreButtonDisabled ? 'moviesCardList__moreMoviesButton button_inactive' : 'moviesCardList__moreMoviesButton');
+
     const keywordMovies = filterFilmByKeyword(movies, keyword, short);
     const filteredMovies = filterFilmsByScreenWidth(keywordMovies, width, count);
+
+    const keywordSavedMovies = filterFilmByKeyword(savedMovies, keyword, short);
+    const filteredSavedMovies = filterFilmsByScreenWidth(keywordSavedMovies, width, count);
     
     function moreFilmsHandle () {
         const num = addedFilmCounter(width);
@@ -25,23 +28,15 @@ function MoviesCardList({movies, keyword, short}) {
     }
 
     function hanldeSavedButton (movieId) {
-        // const film = filterFilmByIsSaved(filteredMovies, isSaved, cardKey);
         //проверить, есть ли в savedMovies film - если нет, то добавить
-        console.log(movieId);
-        console.log('savedMovies');
-        console.log(savedMovies);
         const film = filteredMovies.find(elem => elem.id === movieId);
-        console.log('film');
-        console.log(film);
-        setSavedMovies(film);
-        // if (film) {
-        //     setSavedMovies((state) => {
-        //         return state.map(((item) => item.id !== movieId ? film : item))
-        //     });
-        //     // setCards((oldCards) => {
-        //     //     return oldCards.map((item) => item._id === card._id ? newCard : item)
-        //     // })
-        // }
+        const filmSaved = savedMovies.find(elem => elem.id === movieId);
+
+        if (!filmSaved) {
+            setSavedMovies(state => [...state, film]);
+        } else setSavedMovies(state => {
+            return state.filter((item) => item.id !== movieId)
+        })
     }
 
     useEffect(() => {
