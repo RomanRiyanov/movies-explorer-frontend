@@ -1,21 +1,48 @@
 import React, {useEffect, useState} from "react";
+import { Route, Switch} from 'react-router-dom';
 
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 import { filterFilmByKeyword } from "../../utils/utils/filterFilmByKeyword.js";
 import { filterFilmsByScreenWidth } from "../../utils/utils/filterFilmsByScreenWidth.js";
+// import { filterFilmByIsSaved } from "../../utils/utils/filterFilmByIsSaved.js";
 import { addedFilmCounter } from "../../utils/utils/addedFilmCounter.js";
 
-function MoviesCardList({movies, isSavedRoute, keyword, short}) {
+function MoviesCardList({movies, keyword, short}) {
 
     const [width, setWidth] = useState(window.innerWidth);
     const [count, setCount] = useState(0);
+    const [savedMovies, setSavedMovies] = useState([]);
     const [filteredMoviesLength, setFilteredMoviesLength] = useState(0);
     const [isMoreButtonDisabled, setMoreButtonDisabled] = useState(false);
 
+    const moreButtonClassName = (isMoreButtonDisabled ? 'moviesCardList__moreMoviesButton button_inactive' : 'moviesCardList__moreMoviesButton');
     const keywordMovies = filterFilmByKeyword(movies, keyword, short);
     const filteredMovies = filterFilmsByScreenWidth(keywordMovies, width, count);
+    
+    function moreFilmsHandle () {
+        const num = addedFilmCounter(width);
+        setCount(count + num);
+    }
 
-    // console.log(keywordMovies.length);
+    function hanldeSavedButton (movieId) {
+        // const film = filterFilmByIsSaved(filteredMovies, isSaved, cardKey);
+        //проверить, есть ли в savedMovies film - если нет, то добавить
+        console.log(movieId);
+        console.log('savedMovies');
+        console.log(savedMovies);
+        const film = filteredMovies.find(elem => elem.id === movieId);
+        console.log('film');
+        console.log(film);
+        setSavedMovies(film);
+        // if (film) {
+        //     setSavedMovies((state) => {
+        //         return state.map(((item) => item.id !== movieId ? film : item))
+        //     });
+        //     // setCards((oldCards) => {
+        //     //     return oldCards.map((item) => item._id === card._id ? newCard : item)
+        //     // })
+        // }
+    }
 
     useEffect(() => {
         function handleResize() {
@@ -24,23 +51,6 @@ function MoviesCardList({movies, isSavedRoute, keyword, short}) {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, [width]);
-
-    function moreFilmsHandle () {
-        const num = addedFilmCounter(width);
-        setCount(count + num);
-
-
-        // setFilteredMoviesLength(filteredMovies.length);
-
-        // console.log(keywordMovies.length);
-        // console.log(filteredMovies.length);
-
-        // if (keywordMovies.length === filteredMovies.length) {
-        //     setMoreButtonDisabled(true);
-        // } else if (keywordMovies.length !== filteredMovies.length) {
-        //     setMoreButtonDisabled(false)
-        // };
-    }
 
     useEffect(() => {
         setFilteredMoviesLength(filteredMovies.length);
@@ -54,22 +64,36 @@ function MoviesCardList({movies, isSavedRoute, keyword, short}) {
 
     return (
         <section className='moviesCardList'>
-            <div className="moviesCardList__container">
-                {filteredMovies && filteredMovies.map((movie) => (
-                    <MoviesCard 
-                        key={movie.id} 
-                        movie={movie} 
-                        isSavedRoute={isSavedRoute}
-                        keyword={keyword}
-                    />
-                ))}
-            </div>
+            <Switch>
+                <Route exact path="/movies">
+                <div className="moviesCardList__container">
+                    {filteredMovies && filteredMovies.map((movie) => (
+                        <MoviesCard 
+                            key={movie.id} 
+                            movie={movie} 
+                            onSavedMovie={hanldeSavedButton}
+                            savedMovies={savedMovies}
+                        />
+                    ))}
+                </div>
+                </Route>
+                <Route exact path="/saved-movies">
+                <div className="moviesCardList__container">
+                    {savedMovies && savedMovies.map((movie) => (
+                        <MoviesCard 
+                            key={movie.id}
+                            movie={movie} 
+                            savedMovies={savedMovies}
+                            onSavedMovie={hanldeSavedButton}
+                        />
+                    ))}
+                </div>
+                </Route>
+            </Switch>
             <button 
                 type="button"
                 onClick={moreFilmsHandle}  
-                // className={`moviesCardList__moreMoviesButton`}
-                className={isMoreButtonDisabled ? 'moviesCardList__moreMoviesButton button_inactive' : 'moviesCardList__moreMoviesButton'}
-                // className={`moviesCardList__moreMoviesButton ${isMoreButtonDisabled || 'button_inactive'}`}
+                className={moreButtonClassName}
                 disabled={isMoreButtonDisabled}
             >Ещё
             </button>
@@ -78,6 +102,3 @@ function MoviesCardList({movies, isSavedRoute, keyword, short}) {
   }
   
 export default MoviesCardList;
-// {`moviesCardList__moreMoviesButton ${isMoreButtonDisabled || 'button_inactive'}`}
-
-// {isMoreButtonDisabled ? 'moviesCardList__moreMoviesButton button_inactive' : 'moviesCardList__moreMoviesButton'}

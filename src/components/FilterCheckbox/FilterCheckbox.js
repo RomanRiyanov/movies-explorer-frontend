@@ -6,8 +6,11 @@ const [isChecked, setIsChecked] = useState(false);
 
 function onSwitchCheckbox() {
     setIsChecked(!isChecked);
-    onShortFolmSelect(isChecked);
 };
+
+useEffect(() => {
+  onShortFolmSelect(isChecked);
+}, [isChecked])
 
 return (
       <section className="checkbox_custom">

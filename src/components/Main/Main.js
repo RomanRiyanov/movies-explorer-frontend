@@ -54,7 +54,12 @@ function Main({
       <ProtectedRoute
         exact path="/saved-movies"
         loggedIn={loggedIn}
-        component={SavedMovies}
+        component={Movies}
+
+        // component={SavedMovies}
+        movies={moviesData}
+        onMoviesFind={onMoviesFind}
+        keyword={keyword}
       />
       <ProtectedRoute
         exact path="/profile"
