@@ -28,7 +28,8 @@ function Main({
   loggedIn,
   moviesData,
   onMoviesFind,
-  keyword
+  keyword,
+  onSignOut
 }) {
   return (
     <Switch>
@@ -65,6 +66,7 @@ function Main({
         exact path="/profile"
         loggedIn={loggedIn}
         component={Profile}
+        onSignOut={onSignOut}
       />
       <Route path="*">
         <Redirect to='/page_not_found'/>

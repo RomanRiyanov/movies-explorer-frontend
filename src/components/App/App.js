@@ -16,6 +16,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
 import { moviesApi } from '../../utils/MoviesApi';
+import { mainApi } from '../../utils/MainApi';
 
 function App() {
 
@@ -25,9 +26,14 @@ function App() {
   });
 
   const [loggedIn, setLoggedIn] = useState(true);
+  const [isRegisterSucceed, setRegisterSucceed] = useState(false);
+  const [signInfoPopupOpen, setSignInfoPopupOpen] = useState(false);
+
   const [isToolPopupOpen, setToolPopupOpen] = useState(false);
   const [movies, setMovies] = useState([]);
   const [keyword, setKeyword] = useState('');
+
+  
 
   let history = useHistory();
 
@@ -37,29 +43,66 @@ function App() {
 
     moviesApi.getMovies()
       .then((moviesData) => {
-
-        // console.log('moviesData ' + moviesData);
-
         setMovies(moviesData);
-        
-
       })
       .catch(err => {
         console.log('Ошибка ' + err)
       })
-
-      
   }
 
-  function onRegister() {
+  function onRegister({ name, email, password }) {
     console.log('зарегистрироваться');
-    history.push('/signin');
+
+    return mainApi.register({ name, email, password })
+      .then((res) => {
+        if (!res) {
+          throw new Error ('Попробуйте ещё раз')
+        };
+        history.push('/signin');
+        setRegisterSucceed(true);
+        setSignInfoPopupOpen(true);
+        return res;
+      })
+      .catch((err) => {
+        setRegisterSucceed(false);
+        console.log(`Ошибка при регистрации ${err}`);
+        setSignInfoPopupOpen(true);
+      })
   };
 
-  function onLogin() {
+  function onLogin({ email, password }) {
     console.log('залогиниться');
     history.push('/movies');
+
+
+    return mainApi.authorize({ email, password })
+    .then((res) => {
+        if (!res) {
+            throw new Error ('Неверный email или пароль');
+        }
+        setLoggedIn(true);
+        setRegisterSucceed(true);
+        history.push('/movies');
+    })
+    .catch((err) => {
+        setRegisterSucceed(false);
+        console.log(`Ошибка при авторизации ${err}`);
+        setSignInfoPopupOpen(true);
+      });
   };
+
+  function onSignOut(){
+    return mainApi.signOut()
+      .then((res) => {
+        if (res) {
+            setLoggedIn(false);
+            return res;
+        }
+      })
+      .catch(err => {
+          console.log(`Ошибка при выходе из профиля ${err}`);
+      });
+  }
 
   function openToolPopup() {
     setToolPopupOpen(true);
@@ -79,7 +122,7 @@ function App() {
           </Route>
 
           <Route exact path='/signin'>
-              <Login onLogin={onLogin}/>
+              <Login onLogin={onLogin} onSignOut={onSignOut}/>
           </Route>
           
           <Route exact path='/page_not_found'>
@@ -93,12 +136,13 @@ function App() {
               moviesData={movies}
               onMoviesFind={handleGetMovies}
               keyword={keyword}
+              onSignOut={onSignOut}
             />
             <Footer />
           </Route>
         </Switch>
 
-        <ToolMenuPopup isOpen={isToolPopupOpen} onClose={closeToolPopup}/>
+        <ToolMenuPopup isOpen={isToolPopupOpen} onClose={closeToolPopup} />
 
       </CurrentUserContext.Provider>
       </div>

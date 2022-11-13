@@ -9,17 +9,34 @@ import {
     Link,
   } from 'react-router-dom';
 
-function Login({onLogin}) {
+function Login({onLogin, onSignOut}) {
 
     const currentUser = useContext(CurrentUserContext);
+    
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    function resetForm() {
+        setEmail('');
+        setPassword('');
+    }
 
     function signOut() {
-        console.log('Переход в регистрацию')
+        console.log('Переход в регистрацию');
+        onSignOut();
     };
 
-    function handleLogin() {
+    function handleLogin(event) {
         // event.preventDefault();
-        onLogin();
+        console.log('Залогиниться');
+
+        onLogin({email, password})
+        .then(() => {
+            resetForm();
+          })
+          .catch(err => {
+            console.log('Ошибка при авторизации ' + err);
+          });
     }
 
     return (
@@ -38,9 +55,26 @@ function Login({onLogin}) {
             onSubmit={handleLogin}>
                 <Form className="register__form">
                     <label className="register__text" htmlFor='email_input'>E-mail</label>
-                    <Field className="register__input" type='email' id='email_input' name='email_input' placeholder={'yenail@mail.com'} required></Field>
+                    <Field 
+                        className="register__input"
+                        onChange={(event)=>setEmail(event.target.value)} 
+                        type='email' 
+                        id='email_input' 
+                        name='email_input' 
+                        placeholder={'yenail@mail.com'}
+                        value={email}
+                        required>
+                    </Field>
                     <label className="register__text" htmlFor='pass_input'>Пароль</label>
-                    <Field className="register__input" type='password' id='pass_input' name='pass_input' required></Field>
+                    <Field 
+                        className="register__input" 
+                        onChange={(event)=>setPassword(event.target.value)} 
+                        type='password' 
+                        id='pass_input' 
+                        name='pass_input'
+                        value={password}
+                        required>
+                    </Field>
                     <button type='submit' className='register__button register__button_type_login'>Войти</button>
                     <div className="register__nav">
                         <p className="register__link">Ещё не зарегистрированы?</p>

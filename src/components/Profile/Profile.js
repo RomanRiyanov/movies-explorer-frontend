@@ -6,7 +6,7 @@ import {
     useHistory
   } from 'react-router-dom';
 
-function Profile() {
+function Profile({onSignOut}) {
 
     const currentUser = useContext(CurrentUserContext);
 
@@ -14,6 +14,7 @@ function Profile() {
 
     function signOut() {
         console.log('Выйти из аккаунта');
+        onSignOut();
         history.push('/main');
     };
 

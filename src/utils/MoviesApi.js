@@ -33,86 +33,86 @@ class MoviesApi {
 
 
 
-    getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
-            method: 'GET',
-            credentials: 'include',
-            headers: this._headers
-        })
-        .then(this._checkResponse)
-        }
+    // getUserInfo() {
+    // return fetch(`${this._baseUrl}/users/me`, {
+    //         method: 'GET',
+    //         credentials: 'include',
+    //         headers: this._headers
+    //     })
+    //     .then(this._checkResponse)
+    //     }
 
-    setUserInfo(data) {
-        return fetch(`${this._baseUrl}/users/me`, {
-                method: 'PATCH',
-                credentials: 'include',
-                headers: this._headers,
-                body: JSON.stringify ({
-                    name: data.name,
-                    about: data.about
-                  })
-            })
-            .then(this._checkResponse)
-        }
+    // setUserInfo(data) {
+    //     return fetch(`${this._baseUrl}/users/me`, {
+    //             method: 'PATCH',
+    //             credentials: 'include',
+    //             headers: this._headers,
+    //             body: JSON.stringify ({
+    //                 name: data.name,
+    //                 about: data.about
+    //               })
+    //         })
+    //         .then(this._checkResponse)
+    //     }
 
-    setUserAvatar(data) {
-        return fetch(`${this._baseUrl}/users/me/avatar`, {
-                method: 'PATCH',
-                credentials: 'include',
-                headers: this._headers,
-                body: JSON.stringify (data)
-            })
-            .then(this._checkResponse)
-        }
+    // setUserAvatar(data) {
+    //     return fetch(`${this._baseUrl}/users/me/avatar`, {
+    //             method: 'PATCH',
+    //             credentials: 'include',
+    //             headers: this._headers,
+    //             body: JSON.stringify (data)
+    //         })
+    //         .then(this._checkResponse)
+    //     }
     
-    getCards() {
-        return fetch(`${this._baseUrl}/cards`, {
-                method: 'GET',
-                credentials: 'include',
-                headers: this._headers
-            })
-            .then(this._checkResponse)
-        }
+    // getCards() {
+    //     return fetch(`${this._baseUrl}/cards`, {
+    //             method: 'GET',
+    //             credentials: 'include',
+    //             headers: this._headers
+    //         })
+    //         .then(this._checkResponse)
+    //     }
 
-    addNewCard(data) {
-        return fetch(`${this._baseUrl}/cards`, {
-                method: 'POST',
-                credentials: 'include',
-                headers: this._headers,
-                body: JSON.stringify ({
-                    name: data.name,
-                    link: data.link
-                    })
-            })
-            .then(this._checkResponse)
-        }
+    // addNewCard(data) {
+    //     return fetch(`${this._baseUrl}/cards`, {
+    //             method: 'POST',
+    //             credentials: 'include',
+    //             headers: this._headers,
+    //             body: JSON.stringify ({
+    //                 name: data.name,
+    //                 link: data.link
+    //                 })
+    //         })
+    //         .then(this._checkResponse)
+    //     }
 
-    deleteCard(id) {
-        return fetch(`${this._baseUrl}/cards/${id}`, {
-                method: 'DELETE',
-                credentials: 'include',
-                headers: this._headers,
-            })
-            .then(this._checkResponse)
-        }
+    // deleteCard(id) {
+    //     return fetch(`${this._baseUrl}/cards/${id}`, {
+    //             method: 'DELETE',
+    //             credentials: 'include',
+    //             headers: this._headers,
+    //         })
+    //         .then(this._checkResponse)
+    //     }
 
-    changeLikeCardStatus(id, isLiked) {
-        if (isLiked) {
-            return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-                method: 'DELETE',
-                credentials: 'include',
-                headers: this._headers,
-            })
-            .then(this._checkResponse)
-        } else {
-            return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-                method: 'PUT',
-                credentials: 'include',
-                headers: this._headers,
-            })
-            .then(this._checkResponse)
-        }
-    }
+    // changeLikeCardStatus(id, isLiked) {
+    //     if (isLiked) {
+    //         return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+    //             method: 'DELETE',
+    //             credentials: 'include',
+    //             headers: this._headers,
+    //         })
+    //         .then(this._checkResponse)
+    //     } else {
+    //         return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+    //             method: 'PUT',
+    //             credentials: 'include',
+    //             headers: this._headers,
+    //         })
+    //         .then(this._checkResponse)
+    //     }
+    // }
 }
 
 const MoviesApiConfig = {
