@@ -3,9 +3,10 @@ import { Route, Switch } from "react-router-dom";
 
 const baseUrl = 'https://api.nomoreparties.co';
 
-function MoviesCard({ movie, onSavedMovie, savedMovies}) {
+function MoviesCard({ movie, onSaveMovie, savedMovies}) {
 
     const [duration, setDuration] = useState('');
+    const [imageClassName, setImageClassName] = useState('');
 
     const isMovieSaved = useMemo(() => savedMovies.find(film => film.id === movie.id), [movie, savedMovies])
 
@@ -13,6 +14,11 @@ function MoviesCard({ movie, onSavedMovie, savedMovies}) {
     const saveButtonClassName = (
         `moviesCard__saveButton ${isMovieSaved && 'moviesCard__saveButton_active'}`
     );
+    
+    function defineImageClassName () {
+        if (typeof movie.image === 'object') return `${baseUrl}${movie.image.url}`;
+        else return movie.image;
+    }
 
     function hoursAndMinutes () {
         if (movie.duration >= 60) {
@@ -24,7 +30,7 @@ function MoviesCard({ movie, onSavedMovie, savedMovies}) {
     
     function handleSaveClick() {
         console.log('сохранить карточку с фильмом');
-        return onSavedMovie(movie.id);
+        return onSaveMovie(movie.id);
     }
 
     function handleImageClick() {
@@ -33,6 +39,10 @@ function MoviesCard({ movie, onSavedMovie, savedMovies}) {
     
     useEffect(() => {
         setDuration(hoursAndMinutes());
+    }, [])
+
+    useEffect(() => {
+        setImageClassName(defineImageClassName());
     }, [])
     
     return (
@@ -51,7 +61,7 @@ function MoviesCard({ movie, onSavedMovie, savedMovies}) {
                     </Route>
                 </Switch>
             </div>
-            <img onClick={handleImageClick} src={`${baseUrl}${movie.image.url}`} className='moviesCard__photo' alt='Кадр из фильма'/>
+            <img onClick={handleImageClick} src={imageClassName} className='moviesCard__photo' alt='Кадр из фильма'/>
         </section>
     );
   }

@@ -17,6 +17,7 @@
     text-align: start;
     height: 68px;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .moviesCard__credits {
@@ -75,4 +76,17 @@
     height: 203px;
     width: 100%;
     object-fit: cover;
+}
+
+
+@media (max-width: 1180px) {
+    .moviesCard__photo {
+        height: 190px;
+    }
+}
+
+@media (max-width: 767px) {
+    .moviesCard__photo {
+        height: 168px;
+    }
 }

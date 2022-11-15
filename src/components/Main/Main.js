@@ -7,6 +7,7 @@ import Movies from "../Movies/Movies.js";
 import SavedMovies from "../SavedMovies/SavedMovies.js";
 import Profile from "../Profile/Profile.js";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.js";
+import Preloader from "../Preloader/Preloader.js";
 
 import {
   Route,
@@ -29,7 +30,12 @@ function Main({
   moviesData,
   onMoviesFind,
   keyword,
-  onSignOut
+  onSignOut,
+  updateUser,
+  onSaveMovie,
+  onDeleteMovie,
+  onMountAllSavedMovies,
+  firstIterationMovies
 }) {
   return (
     <Switch>
@@ -37,37 +43,51 @@ function Main({
         <Redirect to='/main'/>
       </Route>
       <Route exact path='/main'>
-        <section className="main__container" id="main__container">
+        <main className="main__container" id="main__container">
           <Promo />
           <AboutProject />
           <Techs />
           <Portfolio />
-        </section>
+        </main>
       </Route>
-      <ProtectedRoute
-        exact path="/movies"
-        loggedIn={loggedIn}
-        component={Movies}
-        movies={moviesData}
-        onMoviesFind={onMoviesFind}
-        keyword={keyword}
-      />
-      <ProtectedRoute
-        exact path="/saved-movies"
-        loggedIn={loggedIn}
-        component={Movies}
-
-        // component={SavedMovies}
-        movies={moviesData}
-        onMoviesFind={onMoviesFind}
-        keyword={keyword}
-      />
-      <ProtectedRoute
-        exact path="/profile"
-        loggedIn={loggedIn}
-        component={Profile}
-        onSignOut={onSignOut}
-      />
+      {/* {loggedIn ? */}
+          <ProtectedRoute
+            exact path="/movies"
+            loggedIn={loggedIn}
+            component={Movies}
+            movies={moviesData}
+            onMoviesFind={onMoviesFind}
+            keyword={keyword}
+            onSaveMovie={onSaveMovie}
+            onDeleteMovie={onDeleteMovie}
+            // onMountAllSavedMovies={onMountAllSavedMovies}
+            firstIterationMovies={firstIterationMovies}
+          /> 
+          {/* : <Preloader/>} */}
+          {/* {loggedIn ? */}
+          <ProtectedRoute
+            exact path="/saved-movies"
+            loggedIn={loggedIn}
+            component={Movies}
+            // component={SavedMovies}
+            movies={moviesData}
+            onMoviesFind={onMoviesFind}
+            keyword={keyword}
+            onSaveMovie={onSaveMovie}
+            onDeleteMovie={onDeleteMovie}
+            firstIterationMovies={firstIterationMovies}
+            // onMountAllSavedMovies={onMountAllSavedMovies}
+          /> 
+          {/* : <Preloader/>} */}
+            {/* {loggedIn ? */}
+            <ProtectedRoute
+            exact path="/profile"
+            loggedIn={loggedIn}
+            component={Profile}
+            onSignOut={onSignOut}
+            updateUser={updateUser}
+        /> 
+        {/* : <Preloader/>} */}
       <Route path="*">
         <Redirect to='/page_not_found'/>
       </Route>

@@ -10,7 +10,6 @@ function SearchForm({onMoviesFind, onShortFolmSelect}) {
     console.log('отправить фильм на поиск');
 
     onMoviesFind(keyword);
-    
   }
 
     return (

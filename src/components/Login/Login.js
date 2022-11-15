@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useContext} from "react";
 import headerLogoPath from '../../images/headerLogo.svg';
-import {CurrentUserContext} from '../context/CurrentUserContext';
 import { Formik, Field, Form } from 'formik';
 
 import {
@@ -10,8 +9,6 @@ import {
   } from 'react-router-dom';
 
 function Login({onLogin, onSignOut}) {
-
-    const currentUser = useContext(CurrentUserContext);
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

@@ -13,7 +13,7 @@ function ProtectedRoute ({
               <Component {...props}/>
             </>)
           } 
-          else return <Redirect to="/login" />
+          else return <Redirect to="/main" />
         }
       }
     </Route>

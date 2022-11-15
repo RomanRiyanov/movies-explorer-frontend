@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useContext} from "react";
 import headerLogoPath from '../../images/headerLogo.svg';
-import {CurrentUserContext} from '../context/CurrentUserContext';
 import { Formik, Field, Form } from 'formik';
 
 import {
@@ -11,8 +10,6 @@ function Register({onRegister}) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    const currentUser = useContext(CurrentUserContext);
 
     function signOut() {
         console.log('Войти в логин')

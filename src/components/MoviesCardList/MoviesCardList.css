@@ -21,6 +21,7 @@
     margin: 0;
     padding-bottom: 30px;
     justify-content: center;
+    box-sizing: border-box;
 }
 
 .moviesCardList__moreMoviesButton {
