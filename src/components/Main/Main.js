@@ -12,8 +12,10 @@ import Preloader from "../Preloader/Preloader.js";
 import {
   Route,
   Switch,
-  Redirect
+  Redirect,
+  useLocation 
 } from 'react-router-dom';
+import { useEffect } from "react";
 
 // function Main() {
 //     return (
@@ -36,7 +38,15 @@ function Main({
   onDeleteMovie,
   onMountAllSavedMovies,
   firstIterationMovies
-}) {
+}){
+
+// const location = useLocation();
+
+// useEffect(() => {
+//   console.log(location)
+//   sessionStorage.setItem('location', location)
+// }, [])
+
   return (
     <Switch>
       <Route exact path='/'>
@@ -50,7 +60,8 @@ function Main({
           <Portfolio />
         </main>
       </Route>
-      {/* {loggedIn ? */}
+      {loggedIn ?
+      <Switch>
           <ProtectedRoute
             exact path="/movies"
             loggedIn={loggedIn}
@@ -64,6 +75,8 @@ function Main({
             firstIterationMovies={firstIterationMovies}
           /> 
           {/* : <Preloader/>} */}
+
+           
           {/* {loggedIn ? */}
           <ProtectedRoute
             exact path="/saved-movies"
@@ -80,14 +93,15 @@ function Main({
           /> 
           {/* : <Preloader/>} */}
             {/* {loggedIn ? */}
-            <ProtectedRoute
+          <ProtectedRoute
             exact path="/profile"
             loggedIn={loggedIn}
             component={Profile}
             onSignOut={onSignOut}
             updateUser={updateUser}
         /> 
-        {/* : <Preloader/>} */}
+        </Switch>
+        : <Preloader/>}
       <Route path="*">
         <Redirect to='/page_not_found'/>
       </Route>

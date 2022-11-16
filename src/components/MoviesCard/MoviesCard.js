@@ -6,7 +6,7 @@ const baseUrl = 'https://api.nomoreparties.co';
 function MoviesCard({ movie, onSaveMovie, savedMovies}) {
 
     const [duration, setDuration] = useState('');
-    const [imageClassName, setImageClassName] = useState('');
+    const [imageSrcRoute, setimageSrcRoute] = useState('');
 
     const isMovieSaved = useMemo(() => savedMovies.find(film => film.id === movie.id), [movie, savedMovies])
 
@@ -15,7 +15,7 @@ function MoviesCard({ movie, onSaveMovie, savedMovies}) {
         `moviesCard__saveButton ${isMovieSaved && 'moviesCard__saveButton_active'}`
     );
     
-    function defineImageClassName () {
+    function defineimageSrcRoute () {
         if (typeof movie.image === 'object') return `${baseUrl}${movie.image.url}`;
         else return movie.image;
     }
@@ -42,7 +42,7 @@ function MoviesCard({ movie, onSaveMovie, savedMovies}) {
     }, [])
 
     useEffect(() => {
-        setImageClassName(defineImageClassName());
+        setimageSrcRoute(defineimageSrcRoute());
     }, [])
     
     return (
@@ -61,7 +61,7 @@ function MoviesCard({ movie, onSaveMovie, savedMovies}) {
                     </Route>
                 </Switch>
             </div>
-            <img onClick={handleImageClick} src={imageClassName} className='moviesCard__photo' alt='Кадр из фильма'/>
+            <img onClick={handleImageClick} src={imageSrcRoute} className='moviesCard__photo' alt='Кадр из фильма'/>
         </section>
     );
   }

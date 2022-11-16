@@ -6,7 +6,8 @@ import {
   Redirect,
   useHistory
 } from 'react-router-dom';
-import cookies from "js-cookies";
+
+import { history } from '../../index';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 import Main from "../Main/Main";
 import Register from "../Register/Register";
@@ -37,7 +38,7 @@ function App() {
 
   
 
-  let history = useHistory();
+  // let history = useHistory();
 
   function openToolPopup() {
     setToolPopupOpen(true);
@@ -154,30 +155,21 @@ function App() {
       }); 
   }
 
-  // function onMountAllSavedMovies () {
-  //   return mainApi.getMovies()
-  //     .then((res) => {
-  //       if (res) {
-  //         // console.log(res);
-  //         // console.log('app onMountAllSavedMovies res');
-  //         setFirstIterationMovies(res);
-  //         return res;
-  //       }
-  //     })
-  //     .catch(err => {
-  //       console.log(`Ошибка при отрисовке сохраненных фильмов ${err}`);
-  //       console.log(err);
-  //     }); 
-  // }
-
   
   useEffect(() => {
+    console.log('hello')
     mainApi.getUserInfo()
-      .then(userData => setCurrentUser({
+      .then((userData) => {
+        setLoggedIn(true);
+        console.log('world')
+
+        setCurrentUser({
         name: userData.name,
         email: userData.email
-      }))
+      })})
       .catch(err => console.log(err))
+
+      return () => {console.log('demontage')}
   }, [])
 
   useEffect(() => {
@@ -186,11 +178,24 @@ function App() {
       .catch(err => console.log(err))
   }, [])
 
-  // useEffect(() => {
-  //   console.log(cookies.getItem('jwt'));
-  //   if (cookies.getItem("jwt"));
-  //   setLoggedIn(true);
-  // }, [])
+    
+// function tokenCheck () {
+//   mainApi.getUserInfo()
+//     .then(userData => {
+//       if (userData) {
+//         setLoggedIn(true);
+
+//         setCurrentUser({
+//           name: userData.name,
+//           email: userData.email
+//         })
+//       }})
+//     .catch(err => console.log(err))
+// }
+
+// useEffect(() => {        
+//   tokenCheck();
+// }, []);
 
   return (
     <div className='body'>
@@ -230,7 +235,7 @@ function App() {
         <ToolMenuPopup isOpen={isToolPopupOpen} onClose={closeToolPopup} />
 
       </CurrentUserContext.Provider>
-      </div>
+    </div>
     </div>
   );
 }
