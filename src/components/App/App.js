@@ -7,7 +7,7 @@ import {
   useHistory
 } from 'react-router-dom';
 
-import { history } from '../../index';
+// import { history } from '../../index';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 import Main from "../Main/Main";
 import Register from "../Register/Register";
@@ -16,6 +16,17 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import ToolMenuPopup from '../ToolMenuPopup/ToolMenuPopup';
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+
+import Promo from "../Promo/Promo.js";
+import AboutProject from "../AboutProject/AboutProject.js";
+import Techs from "../Techs/Techs.js";
+import Portfolio from "../Portfolio/Portfolio.js";
+
+import Movies from "../Movies/Movies.js";
+import SavedMovies from "../SavedMovies/SavedMovies.js";
+import Profile from "../Profile/Profile.js";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.js";
+import Preloader from "../Preloader/Preloader.js";
 
 import { moviesApi } from '../../utils/MoviesApi';
 import { mainApi } from '../../utils/MainApi';
@@ -38,7 +49,7 @@ function App() {
 
   
 
-  // let history = useHistory();
+  let history = useHistory();
 
   function openToolPopup() {
     setToolPopupOpen(true);
@@ -179,23 +190,23 @@ function App() {
   }, [])
 
     
-// function tokenCheck () {
-//   mainApi.getUserInfo()
-//     .then(userData => {
-//       if (userData) {
-//         setLoggedIn(true);
+function tokenCheck () {
+  mainApi.getUserInfo()
+    .then(userData => {
+      if (userData) {
+        setLoggedIn(true);
 
-//         setCurrentUser({
-//           name: userData.name,
-//           email: userData.email
-//         })
-//       }})
-//     .catch(err => console.log(err))
-// }
+        setCurrentUser({
+          name: userData.name,
+          email: userData.email
+        })
+      }})
+    .catch(err => console.log(err))
+}
 
-// useEffect(() => {        
-//   tokenCheck();
-// }, []);
+useEffect(() => {        
+  tokenCheck();
+}, []);
 
   return (
     <div className='body'>
