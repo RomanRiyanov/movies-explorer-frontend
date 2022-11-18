@@ -14,7 +14,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+    position: relative;
 }
 
 .profile__tittle {
@@ -48,9 +48,9 @@
     text-align: right;
 }
 
-.profile__input::placeholder {
+/* .profile__input::placeholder {
     color: black;
-}
+} */
 
 .profile__input:active {
     border: none;
@@ -64,12 +64,17 @@
 }
 
 .profile__link {
+    display: block;
     border: none;
     background: none;
     margin: 204px auto 16px;
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.profile__link_disabled {
+    color: grey;
 }
 
 .profile__link:hover {
@@ -80,6 +85,11 @@
 .profile__link_red {
     margin: 0 auto 50px;
     color: red;
+}
+
+.register__error_profile {
+    font-size: 11px;
+    top: 30px;
 }
 
 @media (max-width: 580px) {

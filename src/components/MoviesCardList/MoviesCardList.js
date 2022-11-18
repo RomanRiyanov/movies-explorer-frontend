@@ -12,7 +12,6 @@ function MoviesCardList({
     short, 
     onSaveMovie, 
     onDeleteMovie, 
-    // onMountAllSavedMovies,
     firstIterationMovies
 }) {
 
@@ -39,8 +38,6 @@ function MoviesCardList({
     function hanldeSavedButton (movieId) {
         const film = filteredMovies.find(elem => elem.id === movieId);
         const filmSaved = savedMovies.find(elem => elem.id === movieId);
-
-        // console.log(film);
 
         if (!filmSaved) {
             onSaveMovie(film)

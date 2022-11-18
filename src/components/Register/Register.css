@@ -53,6 +53,10 @@
     cursor: pointer;
 }
 
+.register__button_disabled {
+    background: grey;
+}
+
 .register__nav {
     display: flex;
     justify-content: center;
@@ -84,6 +88,29 @@
     transition: all 0.5s ease;
     opacity: 0.4;
 }
+
+.register__form {
+    position: relative;
+}
+
+.register__error {
+    color: red;
+    margin: 0;
+    position: absolute;
+}
+
+.register__error_firsInput {
+    top: 76px;
+}
+
+.register__error_secondInput {
+    top: 170px;
+}
+
+.register__error_thirdInput {
+    top: 264px;
+}
+
 
 @media (max-width: 580px) {
     .register {

@@ -14,19 +14,7 @@ import Register from "../Register/Register";
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import ToolMenuPopup from '../ToolMenuPopup/ToolMenuPopup';
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-
-import Promo from "../Promo/Promo.js";
-import AboutProject from "../AboutProject/AboutProject.js";
-import Techs from "../Techs/Techs.js";
-import Portfolio from "../Portfolio/Portfolio.js";
-
-import Movies from "../Movies/Movies.js";
-import SavedMovies from "../SavedMovies/SavedMovies.js";
-import Profile from "../Profile/Profile.js";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.js";
-import Preloader from "../Preloader/Preloader.js";
 
 import { moviesApi } from '../../utils/MoviesApi';
 import { mainApi } from '../../utils/MainApi';
@@ -39,6 +27,8 @@ function App() {
   });
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [isRegisterSucceed, setRegisterSucceed] = useState(false);
   const [signInfoPopupOpen, setSignInfoPopupOpen] = useState(false);
 
@@ -94,7 +84,7 @@ function App() {
 
   function onLogin({ email, password }) {
     console.log('залогиниться');
-    history.push('/movies');
+    // history.push('/movies');
 
 
     return mainApi.authorize({ email, password })
@@ -102,7 +92,8 @@ function App() {
           if (!res) {
               throw new Error ('Неверный email или пароль');
           }
-          setLoggedIn(true);
+          // setLoggedIn(true);
+          tokenCheck();
           setRegisterSucceed(true);
           history.push('/movies');
       })
@@ -166,23 +157,6 @@ function App() {
       }); 
   }
 
-  
-  useEffect(() => {
-    console.log('hello')
-    mainApi.getUserInfo()
-      .then((userData) => {
-        setLoggedIn(true);
-        console.log('world')
-
-        setCurrentUser({
-        name: userData.name,
-        email: userData.email
-      })})
-      .catch(err => console.log(err))
-
-      return () => {console.log('demontage')}
-  }, [])
-
   useEffect(() => {
     mainApi.getMovies()
       .then(res => setFirstIterationMovies(res))
@@ -191,43 +165,64 @@ function App() {
 
     
 function tokenCheck () {
+  console.log('hello')
+  setIsLoading(true);
+
   mainApi.getUserInfo()
     .then(userData => {
-      if (userData) {
+      if (!userData) {
+        throw new Error ('Неверный email или пароль');
+    }
+        console.log('world')
+
         setLoggedIn(true);
+        setIsLoading(false);
 
         setCurrentUser({
           name: userData.name,
           email: userData.email
         })
-      }})
-    .catch(err => console.log(err))
+      })
+    .catch(err => {
+      console.log(err)
+      setIsLoading(false);
+    })
+
+    return () => {console.log('demontage')}
+
 }
 
 useEffect(() => {        
   tokenCheck();
 }, []);
 
+// if (isLoading) 
+// {return 'loadindg...'};
+
   return (
     <div className='body'>
       <div className='page'>
       <CurrentUserContext.Provider value={currentUser}>
         <Switch>
-          <Route exact path='/signup'>
+          <Route exact path='/'>
+            <Redirect to='/main'/>
+          </Route>
+
+          <Route path='/signup'>
             <Register onRegister={onRegister}/>
           </Route>
 
-          <Route exact path='/signin'>
+          <Route path='/signin'>
             <Login onLogin={onLogin} onSignOut={onSignOut}/>
           </Route>
-          
-          <Route exact path='/page_not_found'>
-            <PageNotFound />
+
+          <Route path='/main'>
+            <Main />
           </Route>
 
-          <Route path='/'>
-            <Header onToolButtonClick={openToolPopup} />
-            <Main 
+          <Route path={["/movies", "/saved-movies", "/profile"]}>
+            <ProtectedRoute
+              onToolButtonClick={openToolPopup}
               loggedIn={loggedIn}
               moviesData={movies}
               onMoviesFind={handleGetMovies}
@@ -236,10 +231,12 @@ useEffect(() => {
               updateUser={onUpdateUser}
               onSaveMovie={onSaveMovie}
               onDeleteMovie={onDeleteMovie}
-              // onMountAllSavedMovies={onMountAllSavedMovies}
-              firstIterationMovies={firstIterationMovies}
-            />
-            <Footer />
+              firstIterationMovies={firstIterationMovies}>
+            </ProtectedRoute>
+          </Route>          
+
+          <Route path='*'>
+            <PageNotFound />
           </Route>
         </Switch>
 

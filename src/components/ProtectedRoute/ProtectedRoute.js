@@ -1,66 +1,69 @@
 import React, { useEffect, useRef } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
+import Movies from "../Movies/Movies";
+import Profile from "../Profile/Profile";
 
-function ProtectedRoute ({ 
-  component: Component,
-  ...props }) {
+function ProtectedRoute (
+    {loggedIn,
+    moviesData,
+    onMoviesFind,
+    keyword,
+    onSignOut,
+    updateUser,
+    onSaveMovie,
+    onDeleteMovie,
+    onMountAllSavedMovies,
+    firstIterationMovies,
+    onToolButtonClick}
+  ) {
 
-    // const loggedIn = useRef(false);
-
-    // useEffect(()=> {
-    //   loggedIn.current = 
-    // })
+    useEffect(() => {
+      // if (loggedIn === 'false') {
+        console.log(loggedIn)
+        // return <Redirect to='signin'/>
+  
+    }, [])
 
   return (
-    <Route exact path='/saved-movies'>
-      {() => {
-          if (props.loggedIn) {
-            return (
-            <>
-              <Component {...props}/>
-            </>)
-          } 
-          else return <Redirect to="/main" />
-        }
-      }
-    </Route>
-  );
+    loggedIn &&
+      <Switch>
+        <Route exact path="/movies"> 
+          <Movies
+            loggedIn={loggedIn}
+            movies={moviesData}
+            onMoviesFind={onMoviesFind}
+            keyword={keyword}
+            onSaveMovie={onSaveMovie}
+            onDeleteMovie={onDeleteMovie}
+            firstIterationMovies={firstIterationMovies}
+            onToolButtonClick={onToolButtonClick}
+          />
+        </Route>
+
+        <Route exact path="/saved-movies"> 
+          <Movies
+            loggedIn={loggedIn}
+            movies={moviesData}
+            onMoviesFind={onMoviesFind}
+            keyword={keyword}
+            onSaveMovie={onSaveMovie}
+            onDeleteMovie={onDeleteMovie}
+            firstIterationMovies={firstIterationMovies}
+            onToolButtonClick={onToolButtonClick}
+          />
+        </Route>
+
+        <Route exact path="/profile"> 
+          <Profile
+            loggedIn={loggedIn}
+            component={Profile}
+            onSignOut={onSignOut}
+            updateUser={updateUser}
+            onToolButtonClick={onToolButtonClick}
+          />
+        </Route>
+      </Switch>
+  )
 };
 
 export default ProtectedRoute; 
-
-
-
-
-
-  
-// function tokenCheck () {
-//   mainApi.getUserInfo()
-//     .then(userData => {
-//       if (userData) {
-//         setLoggedIn(true);
-//         setCurrentUser({
-//           name: userData.name,
-//           email: userData.email
-//         })
-//       }})
-//     .catch(err => console.log(err))
-// }
-
-// useEffect(() => {        
-//   tokenCheck();
-// }, [loggedIn]);
-
-// useEffect(() => {
-//   const location = sessionStorage.getItem('location')
-//   console.log(location.pathname);
-//   // <Redirect to={sessionStorage.getItem('location')}/>
-// }, [])
-
-// // useEffect(() => {
-// //   console.log(cookies.getItem('jwt'));
-// //   // console.log(document.cookie);
-// //   if (cookies.get('jwt')) {
-// //     setLoggedIn(true);
-// //   }
-// // }, [])
