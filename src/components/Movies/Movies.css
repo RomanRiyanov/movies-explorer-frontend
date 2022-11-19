@@ -6,3 +6,10 @@
     /* height: 100%; */
     background: #FAFAFA;;
 }
+
+.movies__route {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}

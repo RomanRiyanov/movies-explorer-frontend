@@ -14,10 +14,12 @@ import Register from "../Register/Register";
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import ToolMenuPopup from '../ToolMenuPopup/ToolMenuPopup';
+import InfoPopup from "../InfoPopup/InfoPopup";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.js";
 
 import { moviesApi } from '../../utils/MoviesApi';
 import { mainApi } from '../../utils/MainApi';
+import Preloader from "../Preloader/Preloader";
 
 function App() {
 
@@ -29,10 +31,10 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [isRegisterSucceed, setRegisterSucceed] = useState(false);
-  const [signInfoPopupOpen, setSignInfoPopupOpen] = useState(false);
-
+  const [isSignSucceed, setSignSucceed] = useState(false);
+  const [isInfoPopupOpen, setInfoPopupOpen] = useState(false);
   const [isToolPopupOpen, setToolPopupOpen] = useState(false);
+
   const [movies, setMovies] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [firstIterationMovies, setFirstIterationMovies] = useState([]);
@@ -44,22 +46,30 @@ function App() {
   function openToolPopup() {
     setToolPopupOpen(true);
   }
+  
+  function openInfoPopup() {
+    setInfoPopupOpen(true);
+  }
 
-  function closeToolPopup() {
+  function closeAllPopups() {
     setToolPopupOpen(false);
+    setInfoPopupOpen(false);
   }
 
   function handleGetMovies (keywordFromSearch) {
     console.log('принес в апп ключевое слово ' + keywordFromSearch);
     setKeyword(keywordFromSearch);
+    setIsLoading(true);
 
     moviesApi.getMovies()
       .then((moviesData) => {
         setMovies(moviesData);
+        setIsLoading(false);
       })
       .catch(err => {
         console.log('Ошибка ' + err)
       })
+      .finally(() => setIsLoading(false))
   }
 
   function onRegister({ name, email, password }) {
@@ -71,14 +81,14 @@ function App() {
           throw new Error ('Попробуйте ещё раз')
         };
         history.push('/signin');
-        setRegisterSucceed(true);
-        setSignInfoPopupOpen(true);
+        setSignSucceed(true);
+        setInfoPopupOpen(true);
         return res;
       })
       .catch((err) => {
-        setRegisterSucceed(false);
+        setSignSucceed(false);
         console.log(`Ошибка при регистрации ${err}`);
-        setSignInfoPopupOpen(true);
+        setInfoPopupOpen(true);
       })
   };
 
@@ -94,13 +104,13 @@ function App() {
           }
           // setLoggedIn(true);
           tokenCheck();
-          setRegisterSucceed(true);
+          setSignSucceed(true);
           history.push('/movies');
       })
       .catch((err) => {
-          setRegisterSucceed(false);
+          setSignSucceed(false);
           console.log(`Ошибка при авторизации ${err}`);
-          setSignInfoPopupOpen(true);
+          setInfoPopupOpen(true);
         });
   };
 
@@ -166,7 +176,6 @@ function App() {
     
 function tokenCheck () {
   console.log('hello')
-  setIsLoading(true);
 
   mainApi.getUserInfo()
     .then(userData => {
@@ -176,7 +185,6 @@ function tokenCheck () {
         console.log('world')
 
         setLoggedIn(true);
-        setIsLoading(false);
 
         setCurrentUser({
           name: userData.name,
@@ -185,7 +193,6 @@ function tokenCheck () {
       })
     .catch(err => {
       console.log(err)
-      setIsLoading(false);
     })
 
     return () => {console.log('demontage')}
@@ -220,6 +227,7 @@ useEffect(() => {
             <Main />
           </Route>
 
+          {/* {loggedIn &&  */}
           <Route path={["/movies", "/saved-movies", "/profile"]}>
             <ProtectedRoute
               onToolButtonClick={openToolPopup}
@@ -227,20 +235,24 @@ useEffect(() => {
               moviesData={movies}
               onMoviesFind={handleGetMovies}
               keyword={keyword}
+              onLogin={onLogin}
               onSignOut={onSignOut}
               updateUser={onUpdateUser}
               onSaveMovie={onSaveMovie}
               onDeleteMovie={onDeleteMovie}
-              firstIterationMovies={firstIterationMovies}>
+              firstIterationMovies={firstIterationMovies}
+              isPreloaderOpen={isLoading}>
             </ProtectedRoute>
-          </Route>          
+          </Route>
+          {/* // }      */}
 
           <Route path='*'>
             <PageNotFound />
           </Route>
         </Switch>
 
-        <ToolMenuPopup isOpen={isToolPopupOpen} onClose={closeToolPopup} />
+        <ToolMenuPopup isOpen={isToolPopupOpen} onClose={closeAllPopups} />
+        <InfoPopup success={isSignSucceed} isOpen={isInfoPopupOpen} onClose={closeAllPopups}/>
 
       </CurrentUserContext.Provider>
     </div>

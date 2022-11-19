@@ -6,6 +6,9 @@ import { filterFilmByKeyword } from "../../utils/utils/filterFilmByKeyword.js";
 import { filterFilmsByScreenWidth } from "../../utils/utils/filterFilmsByScreenWidth.js";
 import { addedFilmCounter } from "../../utils/utils/addedFilmCounter.js";
 
+import PageNotFound from "../PageNotFound/PageNotFound.js";
+import Preloader from "../Preloader/Preloader.js";
+
 function MoviesCardList({
     movies, 
     keyword, 
@@ -91,16 +94,17 @@ function MoviesCardList({
         <section className='moviesCardList'>
             <Switch>
                 <Route exact path="/movies">
-                <div className="moviesCardList__container">
-                    {filteredMovies && filteredMovies.map((movie) => (
-                        <MoviesCard 
-                            key={movie.id} 
-                            movie={movie} 
-                            onSaveMovie={hanldeSavedButton}
-                            savedMovies={savedMovies}
-                        />
-                    ))}
-                </div>
+                {keywordMovies.length !== 0 ? 
+                    (<div className="moviesCardList__container">
+                        {filteredMovies && filteredMovies.map((movie) => (
+                            <MoviesCard 
+                                key={movie.id} 
+                                movie={movie} 
+                                onSaveMovie={hanldeSavedButton}
+                                savedMovies={savedMovies}
+                            />
+                        ))}
+                    </div>) : <h2 style={{fontWeight: 400, fontSize: 30}}>По Вашему запросу ничего не найдено</h2> }
                 <button 
                     type="button"
                     onClick={moreFilmsHandle}  
@@ -110,16 +114,17 @@ function MoviesCardList({
                 </button>
                 </Route>
                 <Route exact path="/saved-movies">
-                <div className="moviesCardList__container">
-                    {filteredSavedMovies && filteredSavedMovies.map((movie) => (
-                        <MoviesCard 
-                            key={movie.movieId ? movie.movieId : movie.id}
-                            movie={movie} 
-                            savedMovies={savedMovies}
-                            onSaveMovie={hanldeSavedButton}
-                        />
-                    ))}
-                </div>
+                {filteredSavedMovies.length !== 0 ? 
+                    (<div className="moviesCardList__container">
+                        {filteredSavedMovies && filteredSavedMovies.map((movie) => (
+                            <MoviesCard 
+                                key={movie.movieId ? movie.movieId : movie.id}
+                                movie={movie} 
+                                savedMovies={savedMovies}
+                                onSaveMovie={hanldeSavedButton}
+                            />
+                        ))}
+                    </div>) : <h2 style={{fontWeight: 400, fontSize: 30}}>По Вашему запросу ничего не найдено</h2> }
                 </Route>
             </Switch>
         </section>

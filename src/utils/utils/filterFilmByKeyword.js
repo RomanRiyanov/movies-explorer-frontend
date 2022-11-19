@@ -30,6 +30,7 @@ export const filterFilmByKeyword = (movies, keyword, short) => {
             });
             return shortResult;
         }
+    
         else return resultMovies;
     }
 }

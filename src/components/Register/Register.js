@@ -23,7 +23,7 @@ function Register({onRegister}) {
         console.log('Войти в логин')
     };
 
-    function handleRegister(values) {
+    function handleRegister(values, setSubmitting) {
         // event.preventDefault();
 
         // onRegister({ name, email, password })
@@ -34,7 +34,8 @@ function Register({onRegister}) {
           })
           .catch(err => {
             console.log('Ошибка при регистрации ' + err);
-          });
+          })
+          .finally(() => setSubmitting(false))
     }
 
     return (
@@ -63,9 +64,9 @@ function Register({onRegister}) {
                     password: yup.string()
                         .required('Необходимо ввести пароль'),
                 })}
-                onSubmit={values => {
+                onSubmit={(values, { setSubmitting }) => {
                     // console.log(values)
-                    handleRegister(values)
+                    handleRegister(values, setSubmitting);
                 }}
             >
             {({ errors, touched, values, isSubmitting, isValid, handleChange }) => (

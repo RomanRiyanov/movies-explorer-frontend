@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import Movies from "../Movies/Movies";
 import Profile from "../Profile/Profile";
+import Login from "../Login/Login";
+import InfoPopup from "../InfoPopup/InfoPopup";
 
 function ProtectedRoute (
     {loggedIn,
@@ -9,23 +11,19 @@ function ProtectedRoute (
     onMoviesFind,
     keyword,
     onSignOut,
+    onLogin,
     updateUser,
     onSaveMovie,
     onDeleteMovie,
     onMountAllSavedMovies,
     firstIterationMovies,
-    onToolButtonClick}
+    onToolButtonClick,
+    isPreloaderOpen
+  }
   ) {
 
-    useEffect(() => {
-      // if (loggedIn === 'false') {
-        console.log(loggedIn)
-        // return <Redirect to='signin'/>
-  
-    }, [])
-
   return (
-    loggedIn &&
+    loggedIn ?
       <Switch>
         <Route exact path="/movies"> 
           <Movies
@@ -37,6 +35,7 @@ function ProtectedRoute (
             onDeleteMovie={onDeleteMovie}
             firstIterationMovies={firstIterationMovies}
             onToolButtonClick={onToolButtonClick}
+            isPreloaderOpen={isPreloaderOpen}
           />
         </Route>
 
@@ -50,6 +49,7 @@ function ProtectedRoute (
             onDeleteMovie={onDeleteMovie}
             firstIterationMovies={firstIterationMovies}
             onToolButtonClick={onToolButtonClick}
+            isPreloaderOpen={isPreloaderOpen}
           />
         </Route>
 
@@ -63,7 +63,10 @@ function ProtectedRoute (
           />
         </Route>
       </Switch>
-  )
+    : <Login onLogin={onLogin} onSignOut={onSignOut}/>
+)
 };
 
 export default ProtectedRoute; 
+// : 'Хуйня'
+{/* <Login onLogin={onLogin} onSignOut={onSignOut}/> */}

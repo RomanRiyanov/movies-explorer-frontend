@@ -24,7 +24,7 @@ function Login({onLogin, onSignOut}) {
         onSignOut();
     };
 
-    function handleLogin(values) {
+    function handleLogin(values, setSubmitting) {
         // event.preventDefault();
         console.log('Залогиниться');
 
@@ -35,7 +35,8 @@ function Login({onLogin, onSignOut}) {
           })
           .catch(err => {
             console.log('Ошибка при авторизации ' + err);
-          });
+          })
+          .finally(() => setSubmitting(false))
     }
 
     return (
@@ -63,9 +64,9 @@ function Login({onLogin, onSignOut}) {
                     password: yup.string()
                         .required('Необходимо ввести пароль'),
                 })}
-                onSubmit={values => {
+                onSubmit={(values, { setSubmitting }) => {
                     // console.log(values)
-                    handleLogin(values)
+                    handleLogin(values, setSubmitting);
                 }}
             >
             {({ errors, touched, values, isSubmitting, isValid, handleChange }) => (
