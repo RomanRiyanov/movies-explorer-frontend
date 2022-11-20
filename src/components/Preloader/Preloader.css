@@ -47,12 +47,14 @@
     height: 100%;
     z-index: 10;
     padding: 20px;
+    margin: auto auto;
 }
 
 .preloader__container {
     width: 100px;
     height: 100px;
     position: relative;
+    margin: auto auto;
 }
 
 .preloader__round {

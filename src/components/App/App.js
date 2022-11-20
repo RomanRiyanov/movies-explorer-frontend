@@ -7,7 +7,6 @@ import {
   useHistory
 } from 'react-router-dom';
 
-// import { history } from '../../index';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 import Main from "../Main/Main";
 import Register from "../Register/Register";
@@ -28,6 +27,7 @@ function App() {
     email: "",
   });
 
+  const [isFileLoading, setIsFileloading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -39,16 +39,10 @@ function App() {
   const [keyword, setKeyword] = useState('');
   const [firstIterationMovies, setFirstIterationMovies] = useState([]);
 
-  
-
   let history = useHistory();
 
   function openToolPopup() {
     setToolPopupOpen(true);
-  }
-  
-  function openInfoPopup() {
-    setInfoPopupOpen(true);
   }
 
   function closeAllPopups() {
@@ -57,7 +51,6 @@ function App() {
   }
 
   function handleGetMovies (keywordFromSearch) {
-    console.log('принес в апп ключевое слово ' + keywordFromSearch);
     setKeyword(keywordFromSearch);
     setIsLoading(true);
 
@@ -65,6 +58,7 @@ function App() {
       .then((moviesData) => {
         setMovies(moviesData);
         setIsLoading(false);
+
       })
       .catch(err => {
         console.log('Ошибка ' + err)
@@ -93,16 +87,12 @@ function App() {
   };
 
   function onLogin({ email, password }) {
-    console.log('залогиниться');
-    // history.push('/movies');
-
 
     return mainApi.authorize({ email, password })
       .then((res) => {
           if (!res) {
               throw new Error ('Неверный email или пароль');
           }
-          // setLoggedIn(true);
           tokenCheck();
           setSignSucceed(true);
           history.push('/movies');
@@ -119,6 +109,7 @@ function App() {
       .then((res) => {
         if (res) {
             setLoggedIn(false);
+            localStorage.clear();
             return res;
         }
       })
@@ -137,7 +128,6 @@ function App() {
       })
       .catch(err => {
         console.log(`Ошибка при обновлении профиля ${err}`);
-        console.log(err);
     });
   }
 
@@ -150,7 +140,6 @@ function App() {
       })
       .catch(err => {
         console.log(`Ошибка при создании фильма ${err}`);
-        console.log(err);
       }); 
   }
 
@@ -163,48 +152,47 @@ function App() {
       })
       .catch(err => {
         console.log(`Ошибка при удалении фильма ${err}`);
-        console.log(err);
       }); 
   }
 
   useEffect(() => {
+    setIsFileloading(true);
     mainApi.getMovies()
-      .then(res => setFirstIterationMovies(res))
+      .then(res => {
+        setFirstIterationMovies(res);
+      })
       .catch(err => console.log(err))
+      .finally(() => {setIsFileloading(false);})
   }, [])
 
     
 function tokenCheck () {
-  console.log('hello')
+  setIsFileloading(true);
 
   mainApi.getUserInfo()
     .then(userData => {
       if (!userData) {
         throw new Error ('Неверный email или пароль');
     }
-        console.log('world')
-
         setLoggedIn(true);
 
         setCurrentUser({
           name: userData.name,
           email: userData.email
-        })
+        })        
       })
     .catch(err => {
       console.log(err)
     })
-
-    return () => {console.log('demontage')}
-
+    .finally(() => {setIsFileloading(false);})
 }
 
 useEffect(() => {        
   tokenCheck();
 }, []);
 
-// if (isLoading) 
-// {return 'loadindg...'};
+if (isFileLoading) 
+{return <Preloader />};
 
   return (
     <div className='body'>
@@ -227,7 +215,6 @@ useEffect(() => {
             <Main />
           </Route>
 
-          {/* {loggedIn &&  */}
           <Route path={["/movies", "/saved-movies", "/profile"]}>
             <ProtectedRoute
               onToolButtonClick={openToolPopup}
@@ -244,7 +231,6 @@ useEffect(() => {
               isPreloaderOpen={isLoading}>
             </ProtectedRoute>
           </Route>
-          {/* // }      */}
 
           <Route path='*'>
             <PageNotFound />

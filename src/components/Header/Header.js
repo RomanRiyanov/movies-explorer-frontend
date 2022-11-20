@@ -8,18 +8,6 @@ import {
 
 function Header({ onToolButtonClick }) {
 
-  function goToFislms(){
-    console.log('идти во вкладку фильмы');
-  }
-
-  function goToSavedFislms(){
-    console.log('идти во вкладку сохраненные фильмы');
-  }
-  
-  function goToProfile(){
-    console.log('идти во вкладку профиль');
-  }
-
   function openToolsPopup(){
     console.log('открыть всплывающее меню');
     onToolButtonClick();
@@ -41,10 +29,10 @@ function Header({ onToolButtonClick }) {
                     <a href="main"> 
                       <img className='header__logo' src={headerLogoPath} alt='Логотип сайта'/>
                     </a>
-                    <NavLink activeClassName='header__link_bold' onClick={goToFislms} className='header__link' to='/movies'>Фильмы</NavLink>
-                    <NavLink activeClassName='header__link_bold' onClick={goToSavedFislms} className='header__link' to='/saved-movies'>Сохраненные фильмы</NavLink>
+                    <NavLink activeClassName='header__link_bold' className='header__link' to='/movies'>Фильмы</NavLink>
+                    <NavLink activeClassName='header__link_bold' className='header__link' to='/saved-movies'>Сохраненные фильмы</NavLink>
                     <button type="button" onClick={openToolsPopup} className='button__toolPopup'></button>
-                    <button type="button" className='header__link_account'><NavLink activeClassName='header__link_bold' onClick={goToProfile} className='header__link' to='/profile'>Аккаунт</NavLink></button>
+                    <button type="button" className='header__link_account'><NavLink activeClassName='header__link_bold' className='header__link' to='/profile'>Аккаунт</NavLink></button>
                   </nav>
                 </section>
               </Route>

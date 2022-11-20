@@ -6,16 +6,13 @@ import { filterFilmByKeyword } from "../../utils/utils/filterFilmByKeyword.js";
 import { filterFilmsByScreenWidth } from "../../utils/utils/filterFilmsByScreenWidth.js";
 import { addedFilmCounter } from "../../utils/utils/addedFilmCounter.js";
 
-import PageNotFound from "../PageNotFound/PageNotFound.js";
-import Preloader from "../Preloader/Preloader.js";
-
 function MoviesCardList({
     movies, 
     keyword, 
     short, 
     onSaveMovie, 
     onDeleteMovie, 
-    firstIterationMovies
+    firstIterationMovies,
 }) {
 
     const [width, setWidth] = useState(window.innerWidth);
@@ -31,7 +28,6 @@ function MoviesCardList({
 
     const keywordSavedMovies = filterFilmByKeyword(savedMovies, keyword, short);
     const filteredSavedMovies = filterFilmsByScreenWidth(keywordSavedMovies, width, count); 
-
     
     function moreFilmsHandle () {
         const num = addedFilmCounter(width);
@@ -39,15 +35,14 @@ function MoviesCardList({
     }
 
     function hanldeSavedButton (movieId) {
-        const film = filteredMovies.find(elem => elem.id === movieId);
-        const filmSaved = savedMovies.find(elem => elem.id === movieId);
-
+        const film = filteredMovies.find(elem => (elem.movieId ?? elem.id) === movieId);
+        const filmSaved = savedMovies.find(elem => (elem.movieId ?? elem.id) === movieId);
+        
         if (!filmSaved) {
             onSaveMovie(film)
                 .then((res) => {
                     setSavedMovies(state => [...state, film]);
                     console.log('фильм сохранен на сервер');
-                    console.log(res);
                     return res;
                 })
                 .catch(err => {
@@ -56,7 +51,7 @@ function MoviesCardList({
             } 
         else onDeleteMovie(movieId)
                 .then((res) => {
-                    setSavedMovies(state => {return state.filter((item) => item.id !== movieId)});
+                    setSavedMovies(state => {return state.filter((item) => (item.movieId ?? item.id) !== movieId)});
                     return res;
                 })
                 .catch(err => {
@@ -81,10 +76,6 @@ function MoviesCardList({
             setMoreButtonDisabled(false)
         };
     }, [keywordMovies, filteredMovies.length, keywordMovies.length, filteredMoviesLength])
-
-    // useEffect(() => {
-    //     onMountAllSavedMovies();
-    // }, [])
 
     useEffect(() => {
         setSavedMovies(firstIterationMovies);
@@ -116,6 +107,7 @@ function MoviesCardList({
                 <Route exact path="/saved-movies">
                 {filteredSavedMovies.length !== 0 ? 
                     (<div className="moviesCardList__container">
+                        
                         {filteredSavedMovies && filteredSavedMovies.map((movie) => (
                             <MoviesCard 
                                 key={movie.movieId ? movie.movieId : movie.id}

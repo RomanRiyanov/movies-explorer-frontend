@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchForm from "../SearchForm/SearchForm.js";
 import MoviesCardList from "../MoviesCardList/MoviesCardList.js";
 import Header from "../Header/Header.js";
@@ -20,6 +20,7 @@ function Movies({
 
     function isFilmShort (checkBoxSelected) {
         setIsShort(checkBoxSelected);
+        localStorage.setItem('localStorageShort', checkBoxSelected)
     }
     
     return (

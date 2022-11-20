@@ -8,7 +8,7 @@ function Portfolio () {
             <LandingTittle tittle__text='Студент'/>
             <div className="portfolio__info">
                 <div>
-                    <h2 className="tittle__portfolio">Ромашка</h2>
+                    <h2 className="tittle__portfolio">Роман</h2>
                     <h3 className="subtittle__portfolio">Старший матрос</h3>
                     <p className="text__portfolio">
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. 

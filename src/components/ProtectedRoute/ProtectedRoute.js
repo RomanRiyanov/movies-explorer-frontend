@@ -1,9 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import { Route, Redirect, Switch } from "react-router-dom";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 import Movies from "../Movies/Movies";
 import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
-import InfoPopup from "../InfoPopup/InfoPopup";
 
 function ProtectedRoute (
     {loggedIn,
@@ -15,7 +14,6 @@ function ProtectedRoute (
     updateUser,
     onSaveMovie,
     onDeleteMovie,
-    onMountAllSavedMovies,
     firstIterationMovies,
     onToolButtonClick,
     isPreloaderOpen
@@ -68,5 +66,4 @@ function ProtectedRoute (
 };
 
 export default ProtectedRoute; 
-// : 'Хуйня'
-{/* <Login onLogin={onLogin} onSignOut={onSignOut}/> */}
+

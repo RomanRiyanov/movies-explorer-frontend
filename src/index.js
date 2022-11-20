@@ -12,22 +12,8 @@ export const history = createBrowserHistory();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    {/* <React.StrictMode> */}
+    <React.StrictMode>
       <App />
-    {/* </React.StrictMode> */}
+    </React.StrictMode>
   </BrowserRouter>
 );
-
-// {/* <BrowserRouter>
-// <React.StrictMode>
-//   <App />
-// </React.StrictMode>
-// </BrowserRouter> */}
-
-
-
-// {/* <Router history={history}>
-// {/* <React.StrictMode> */}
-//   <App />
-// {/* </React.StrictMode> */}
-// </Router> */}

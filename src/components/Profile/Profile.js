@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from "react";
+import React, {useContext} from "react";
 import {CurrentUserContext} from '../context/CurrentUserContext';
 import { Formik, Field, Form } from 'formik';
 import * as yup from 'yup';
@@ -12,10 +12,6 @@ import {
 function Profile({onSignOut, updateUser, onToolButtonClick}) {
 
     const currentUser = useContext(CurrentUserContext);
-
-
-    // const [name, setName] = useState('');
-    // const [email, setEmail] = useState('');
 
     const history = useHistory();
 

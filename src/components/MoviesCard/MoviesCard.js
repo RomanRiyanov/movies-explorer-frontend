@@ -4,11 +4,11 @@ import { Route, Switch } from "react-router-dom";
 const baseUrl = 'https://api.nomoreparties.co';
 
 function MoviesCard({ movie, onSaveMovie, savedMovies}) {
-
     const [duration, setDuration] = useState('');
     const [imageSrcRoute, setimageSrcRoute] = useState('');
 
-    const isMovieSaved = useMemo(() => savedMovies.find(film => film.id === movie.id), [movie, savedMovies])
+    const isMovieSaved = useMemo(() => savedMovies.find((film) => {
+        return (film.movieId ?? film.id) === (movie.id ?? movie.movieId)}), [movie, savedMovies])
 
     const saveButtonDeleteClassName = 'moviesCard__saveButton moviesCard__saveButton_delete';
     const saveButtonClassName = (
@@ -30,7 +30,7 @@ function MoviesCard({ movie, onSaveMovie, savedMovies}) {
     
     function handleSaveClick() {
         console.log('сохранить карточку с фильмом');
-        return onSaveMovie(movie.id);
+        return onSaveMovie(movie.id || movie.movieId);
     }
 
     function handleImageClick() {

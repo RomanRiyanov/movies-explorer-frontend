@@ -1,23 +1,11 @@
-import React, {useEffect, useState, useContext} from "react";
+import React from "react";
 import headerLogoPath from '../../images/headerLogo.svg';
 import { Formik, Field, Form } from 'formik';
 import * as yup from 'yup';
 
-import {
-    Route,
-    Switch,
-    Link,
-  } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Login({onLogin, onSignOut}) {
-    
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-
-    // function resetForm() {
-    //     setEmail('');
-    //     setPassword('');
-    // }
 
     function signOut() {
         console.log('Переход в регистрацию');
@@ -25,12 +13,9 @@ function Login({onLogin, onSignOut}) {
     };
 
     function handleLogin(values, setSubmitting) {
-        // event.preventDefault();
-        console.log('Залогиниться');
 
         onLogin(values)
         .then(() => {
-            // resetForm();
             return;
           })
           .catch(err => {
@@ -53,11 +38,6 @@ function Login({onLogin, onSignOut}) {
                     password: ''
                 }}
                 validationSchema={yup.object().shape({
-                    // name: yup.string()
-                    //     .min(2, 'Имя должно иметь больше двух символов')
-                    //     .max(30, 'Имя не должно содержать больше 30 символов')
-                    //     .matches(/^[- ?!,.a-zA-Zа-яА-ЯёЁ\s]+/, 'Цифры и спецсимволы запрещены')
-                    //     .required('Необходимо ввести имя'),
                     email: yup.string()
                         .email('Значение email введено некорректно')
                         .required('Необходимо ввести email'),
@@ -65,7 +45,6 @@ function Login({onLogin, onSignOut}) {
                         .required('Необходимо ввести пароль'),
                 })}
                 onSubmit={(values, { setSubmitting }) => {
-                    // console.log(values)
                     handleLogin(values, setSubmitting);
                 }}
             >
@@ -75,7 +54,6 @@ function Login({onLogin, onSignOut}) {
                     <Field 
                         className="register__input"
                         onChange={handleChange} 
-                        // (event)=>setEmail(event.target.value)
                         id='email_input' 
                         name='email' 
                         placeholder={'Введите email'}
@@ -87,7 +65,6 @@ function Login({onLogin, onSignOut}) {
                     <Field 
                         className="register__input"
                         onChange={handleChange} 
-                        // onChange={(event)=>setPassword(event.target.value)} 
                         type='password' 
                         id='password_input' 
                         name='password'

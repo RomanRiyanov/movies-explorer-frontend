@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from "react";
 
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox.js'
-function SearchForm({onMoviesFind, onShortFolmSelect}) {
+function SearchForm({
+  onMoviesFind, 
+  onShortFolmSelect,
+  localStorageKeyword,
+}) {
 
   const [keyword, setKeyword] = useState('');
 
   function onSubmit(event){
     event.preventDefault();
-    console.log('отправить фильм на поиск');
+    localStorage.setItem('localStorageKeyword', keyword)
 
     onMoviesFind(keyword);
   }
+
+  useEffect(() => {
+    if (localStorage.getItem('localStorageKeyword')) {
+      setKeyword(localStorage.getItem('localStorageKeyword'));
+      onMoviesFind(localStorage.getItem('localStorageKeyword'));
+    };
+  }, [])
 
     return (
         <form onSubmit={onSubmit} className="searchForm__form">

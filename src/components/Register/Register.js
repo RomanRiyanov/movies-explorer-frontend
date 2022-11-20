@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from "react";
+import React from "react";
 import headerLogoPath from '../../images/headerLogo.svg';
 import { Formik, Field, Form } from 'formik';
 import * as yup from 'yup';
@@ -9,27 +9,14 @@ import {
 
 function Register({onRegister}) {
     
-    // const [name, setName] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-
-    // function resetForm() {
-    //     setName('');
-    //     setEmail('');
-    //     setPassword('');
-    // }
-
     function signOut() {
         console.log('Войти в логин')
     };
 
     function handleRegister(values, setSubmitting) {
-        // event.preventDefault();
 
-        // onRegister({ name, email, password })
         onRegister(values)
           .then(() => {
-            // resetForm();
             return;
           })
           .catch(err => {
@@ -65,7 +52,6 @@ function Register({onRegister}) {
                         .required('Необходимо ввести пароль'),
                 })}
                 onSubmit={(values, { setSubmitting }) => {
-                    // console.log(values)
                     handleRegister(values, setSubmitting);
                 }}
             >
@@ -74,7 +60,6 @@ function Register({onRegister}) {
                     <label className="register__text" htmlFor='name_input'>Имя</label>
                     <Field 
                         value={values.name} 
-                        // onChange={(event)=>setName(event.target.value)} 
                         onChange={handleChange} 
                         className="register__input" 
                         type='text' 
@@ -87,7 +72,6 @@ function Register({onRegister}) {
                     <label className="register__text" htmlFor='email_input'>E-mail</label>
                     <Field 
                         value={values.email} 
-                        // onChange={(event)=>setEmail(event.target.value)}
                         onChange={handleChange} 
                         className="register__input" 
                         type='email' 
@@ -100,7 +84,6 @@ function Register({onRegister}) {
                     <label className="register__text" htmlFor='pass_input'>Пароль</label>
                     <Field 
                         value={values.password} 
-                        // onChange={(event)=>setPassword(event.target.value)} 
                         onChange={handleChange} 
                         className="register__input" 
                         type='password' 
