@@ -74,9 +74,9 @@ function App() {
         if (!res) {
           throw new Error ('Попробуйте ещё раз')
         };
-        history.push('/signin');
         setSignSucceed(true);
         setInfoPopupOpen(true);
+        onLogin({ email, password });
         return res;
       })
       .catch((err) => {
@@ -123,12 +123,21 @@ function App() {
       .then((res) => {
         if (res) {
           setCurrentUser({name: name, email: email});
+          setSignSucceed(true);
+          setInfoPopupOpen(true);
           return res;
         }
       })
       .catch(err => {
+        setSignSucceed(false);
+        setInfoPopupOpen(true);
         console.log(`Ошибка при обновлении профиля ${err}`);
     });
+  }
+
+  function handleFailUpdate() {
+    setSignSucceed(false);
+    setInfoPopupOpen(true);
   }
 
   function onSaveMovie(movie) {
@@ -212,7 +221,7 @@ if (isFileLoading)
           </Route>
 
           <Route path='/main'>
-            <Main />
+            <Main loggedIn={loggedIn}/>
           </Route>
 
           <Route path={["/movies", "/saved-movies", "/profile"]}>
@@ -228,7 +237,8 @@ if (isFileLoading)
               onSaveMovie={onSaveMovie}
               onDeleteMovie={onDeleteMovie}
               firstIterationMovies={firstIterationMovies}
-              isPreloaderOpen={isLoading}>
+              isPreloaderOpen={isLoading}
+              onFailUpdate={handleFailUpdate}>
             </ProtectedRoute>
           </Route>
 

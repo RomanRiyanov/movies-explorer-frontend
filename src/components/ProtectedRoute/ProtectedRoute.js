@@ -16,7 +16,8 @@ function ProtectedRoute (
     onDeleteMovie,
     firstIterationMovies,
     onToolButtonClick,
-    isPreloaderOpen
+    isPreloaderOpen,
+    onFailUpdate
   }
   ) {
 
@@ -58,6 +59,7 @@ function ProtectedRoute (
             onSignOut={onSignOut}
             updateUser={updateUser}
             onToolButtonClick={onToolButtonClick}
+            onFailUpdate={onFailUpdate}
           />
         </Route>
       </Switch>

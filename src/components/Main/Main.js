@@ -6,11 +6,11 @@ import Header from "../Header/Header.js";
 import Footer from "../Footer/Footer.js";
 
 
-function Main(){
+function Main({ loggedIn }){
 
   return (
       <>
-        <Header/>
+        <Header loggedIn={loggedIn}/>
           <main className="main__container" id="main__container">
             <Promo />
             <AboutProject />

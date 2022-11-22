@@ -73,7 +73,7 @@ function Login({onLogin, onSignOut}) {
                         >
                     </Field>
                     {errors.password && touched.password ? <p className='register__error register__error_secondInput' >{errors.password}</p> : null}
-                    <button type='submit' disabled={isSubmitting} className={isValid ? 'register__button register__button_type_login' : 'register__button_disabled register__button register__button_type_login'}>Войти</button>
+                    <button type='submit' disabled={!isValid} className={isValid ? 'register__button register__button_type_login' : 'register__button_disabled register__button register__button_type_login'}>Войти</button>
                     <div className="register__nav">
                         <p className="register__link">Ещё не зарегистрированы?</p>
                         <Link onClick={signOut} className='register__link register__link_blue' to='/signup'>Регистрация</Link>

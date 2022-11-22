@@ -4,27 +4,23 @@ import {
     Switch,
     Link,
     NavLink,
+    useLocation
   } from 'react-router-dom';
 
-function Header({ onToolButtonClick }) {
+function Header({ onToolButtonClick, loggedIn }) {
+
+  const location = useLocation();
+  const isMainLocation = location.pathname === '/main';
+  const headerContainerClassname = `header__container ${isMainLocation || 'header__container_white'}`;
 
   function openToolsPopup(){
     console.log('открыть всплывающее меню');
     onToolButtonClick();
   }
+
     return (
-            <Switch>
-              <Route exact path='/main'>
-                <section className='header__container'>                  
-                  <img className='header__logo' src={headerLogoPath} alt='Логотип сайта'/>
-                  <nav className='sign__container'>
-                      <Link className='nav__link nav__link_signUpLink' to='/signup'>Регистрация</Link>
-                      <button type="button" className='nav__link_signInLink'><Link className='nav__link nav__link_signInLink' to='/signin'>Войти</Link></button>
-                  </nav>
-                </section>
-              </Route>
-              <Route path='/'>
-                <section className='header__container header__container_white'>
+              loggedIn ? 
+              <section className={headerContainerClassname}>
                   <nav className='nav__container'>
                     <a href="main"> 
                       <img className='header__logo' src={headerLogoPath} alt='Логотип сайта'/>
@@ -35,8 +31,14 @@ function Header({ onToolButtonClick }) {
                     <button type="button" className='header__link_account'><NavLink activeClassName='header__link_bold' className='header__link' to='/profile'>Аккаунт</NavLink></button>
                   </nav>
                 </section>
-              </Route>
-            </Switch>
+              :
+              <section className={headerContainerClassname}>                  
+                <img className='header__logo' src={headerLogoPath} alt='Логотип сайта'/>
+                  <nav className='sign__container'>
+                      <Link className='nav__link nav__link_signUpLink' to='/signup'>Регистрация</Link>
+                      <button type="button" className='nav__link_signInLink'><Link className='nav__link nav__link_signInLink' to='/signin'>Войти</Link></button>
+                  </nav>
+                </section>
     );
   }
   

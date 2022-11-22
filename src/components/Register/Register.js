@@ -92,7 +92,7 @@ function Register({onRegister}) {
                     >
                     </Field>
                     {errors.password && touched.password ? <p className='register__error register__error_thirdInput' >{errors.password}</p> : null}
-                    <button type='submit' disabled={isSubmitting} className={isValid ? 'register__button' : 'register__button_disabled register__button'}>Зарегистироваться</button>
+                    <button type='submit' disabled={!isValid} className={isValid ? 'register__button' : 'register__button_disabled register__button'}>Зарегистироваться</button>
                     <div className="register__nav">
                         <p className="register__link">Уже зарегистрированы?</p>
                         <Link onClick={signOut} className='register__link register__link_blue' to='/signin'>Войти</Link>

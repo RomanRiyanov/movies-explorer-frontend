@@ -75,7 +75,7 @@ function MoviesCardList({
         } else if (keywordMovies.length !== filteredMoviesLength) {
             setMoreButtonDisabled(false)
         };
-    }, [keywordMovies, filteredMovies.length, keywordMovies.length, filteredMoviesLength])
+    }, [keywordMovies, filteredMovies, filteredMoviesLength])
 
     useEffect(() => {
         setSavedMovies(firstIterationMovies);

@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {CurrentUserContext} from '../context/CurrentUserContext';
 import { Formik, Field, Form } from 'formik';
 import * as yup from 'yup';
@@ -9,11 +9,16 @@ import {
     useHistory
   } from 'react-router-dom';
 
-function Profile({onSignOut, updateUser, onToolButtonClick}) {
+function Profile({onSignOut, updateUser, onToolButtonClick, loggedIn, onFailUpdate}) {
 
     const currentUser = useContext(CurrentUserContext);
 
     const history = useHistory();
+
+    // const initialValues = {
+    //     name: currentUser.name, 
+    //     email: currentUser.email
+    // }
 
     function signOut() {
         console.log('Выйти из аккаунта');
@@ -21,37 +26,33 @@ function Profile({onSignOut, updateUser, onToolButtonClick}) {
         history.push('/main');
     };
 
-    function editProfile(values) {
-        console.log('Редактировать аккаунт');       
-        //  console.log(values);
+    function editProfile(values) {        
+        let sendedName = currentUser.name;
+        let sendedEmail = currentUser.email;
 
-        
-        // let sendedName = currentUser.name;
-        // let sendedEmail = currentUser.email;
-
-        // if (values.name !== '') sendedName = values.name;
-        // if (values.email !== '') sendedEmail = values.email;
-
-
-        updateUser(values.name, values.email)
-            .then((res) => {
-                return res;
-            })
-            .catch(err => {
-                console.log('Ошибка при регистрации ' + err);
-            });
+        if ((values.name !== sendedName) || (values.email !== sendedEmail)) {
+            updateUser(values.name, values.email)
+                .then((res) => {
+                    return res;
+                })
+                .catch(err => {
+                    console.log('Ошибка при регистрации ' + err);
+                });
+        }
+        else onFailUpdate();
     }
 
     return (
         <>   
-        <Header onToolButtonClick={onToolButtonClick}/>
+        <Header onToolButtonClick={onToolButtonClick} loggedIn={loggedIn}/>
             <section className="profile__container">
                     <h2 className="profile__tittle">{`Привет, ${currentUser.name}!`}</h2>
                     <Formik
-                        initialValues={{
-                            name: '', 
-                            email: ''
+                        initialValues = {{
+                            name: currentUser.name, 
+                            email: currentUser.email
                         }}
+                        enableReinitialize
                         validationSchema={yup.object().shape({
                             name: yup.string()
                                 .min(2, 'Больше двух букв')
@@ -62,8 +63,8 @@ function Profile({onSignOut, updateUser, onToolButtonClick}) {
                                 .email('E-mail некорректный')
                                 .required('Необходимо ввести email'),
                         })}
-                        onSubmit={values => {
-                            editProfile(values)
+                        onSubmit={(values) => {
+                            editProfile(values);
                         }}
                     >
                     {({ errors, touched, values, isSubmitting, isValid, handleChange }) => (
@@ -78,7 +79,7 @@ function Profile({onSignOut, updateUser, onToolButtonClick}) {
                                     onChange={handleChange} 
                                     name='name'
                                     id="name_input"
-                                    placeholder={currentUser.name} 
+                                    // placeholder={currentUser.name} 
                                 > 
                                 </Field>
                                 {errors.name && touched.name ? <p className='register__error register__error_profile'>{errors.name}</p> : null}
@@ -94,12 +95,12 @@ function Profile({onSignOut, updateUser, onToolButtonClick}) {
                                     onChange={handleChange} 
                                     name='email'
                                     id='email_input'
-                                    placeholder={currentUser.email}
+                                    // placeholder={currentUser.email}
                                 >
                                 </Field>
                                 {errors.email && touched.email ? <p className='register__error register__error_profile'>{errors.email}</p> : null}
                             </div>
-                            <button type="submit" disabled={isSubmitting} className={isValid ? 'profile__link' : 'profile__link profile__link_disabled'}>Редактировать</button>
+                            <button type="submit" disabled={!isValid} className={isValid ? 'profile__link' : 'profile__link profile__link_disabled'}>Редактировать</button>
                         </Form>
                         )}
                     </Formik>

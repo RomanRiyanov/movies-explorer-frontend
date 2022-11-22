@@ -14,7 +14,8 @@ function Movies({
     onMountAllSavedMovies, 
     firstIterationMovies,
     onToolButtonClick,
-    isPreloaderOpen
+    isPreloaderOpen,
+    loggedIn
 }) {
     const [isShort, setIsShort] = useState(false);
 
@@ -25,7 +26,7 @@ function Movies({
     
     return (
         <section className="movies__route">
-        <Header onToolButtonClick={onToolButtonClick}/>
+        <Header onToolButtonClick={onToolButtonClick} loggedIn={loggedIn}/>
             <main className="movies__container">
                 <SearchForm 
                     onMoviesFind={onMoviesFind} 
