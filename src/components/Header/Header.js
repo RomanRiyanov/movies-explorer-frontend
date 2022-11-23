@@ -11,7 +11,13 @@ function Header({ onToolButtonClick, loggedIn }) {
 
   const location = useLocation();
   const isMainLocation = location.pathname === '/main';
-  const headerContainerClassname = `header__container ${isMainLocation || 'header__container_white'}`;
+  const isSignLocation = location.pathname === '/signin' || location.pathname === '/signup';
+  const headerMainClassname = `header__container ${
+    (loggedIn && 'header__container_white') && 
+    (isMainLocation || 'header__container_white')}`;
+  const headerSignClassname = `header__container ${
+    (loggedIn && 'header__container_white') && 
+    (isSignLocation || 'header__container_white')}`;
 
   function openToolsPopup(){
     console.log('открыть всплывающее меню');
@@ -20,7 +26,7 @@ function Header({ onToolButtonClick, loggedIn }) {
 
     return (
               loggedIn ? 
-              <section className={headerContainerClassname}>
+              <section className={isSignLocation ? headerSignClassname : headerMainClassname }>
                   <nav className='nav__container'>
                     <a href="main"> 
                       <img className='header__logo' src={headerLogoPath} alt='Логотип сайта'/>
@@ -32,7 +38,7 @@ function Header({ onToolButtonClick, loggedIn }) {
                   </nav>
                 </section>
               :
-              <section className={headerContainerClassname}>                  
+              <section className={headerMainClassname}>                  
                 <img className='header__logo' src={headerLogoPath} alt='Логотип сайта'/>
                   <nav className='sign__container'>
                       <Link className='nav__link nav__link_signUpLink' to='/signup'>Регистрация</Link>

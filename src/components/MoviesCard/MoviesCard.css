@@ -7,9 +7,11 @@
     padding: 0;
     background: #FFFFFF;
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 3px;
 }
 
 .moviesCard__container {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,6 +44,24 @@
     margin: 0;
 }
 
+.moviesCard__credits .moviesCard__description {
+    display: none;
+    position: absolute;
+}
+
+.moviesCard__credits:hover .moviesCard__description {
+    display: block;
+    width: 270px;
+    height: 155px;
+    border-radius: 10px;
+    background-color:  rgba(179, 216, 245, 0.9);
+    box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.2);
+    overflow: scroll;
+    overflow-x: hidden;
+    top: -155px;
+    cursor: pointer;
+}
+
 .moviesCard__saveButton {
     margin: 14px;
     padding: 0px;
@@ -72,7 +92,12 @@
     background-image: url(../../images/saveButtonDelete.svg);
 }
 
+.moviesCard__photo_container {
+    width: 100%;
+}
+
 .moviesCard__photo {
+    cursor: pointer;
     height: 203px;
     width: 100%;
     object-fit: cover;

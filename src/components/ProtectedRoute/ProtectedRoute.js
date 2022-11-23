@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Movies from "../Movies/Movies";
 import Profile from "../Profile/Profile";
-import Login from "../Login/Login";
+import Main from "../Main/Main";
 
 function ProtectedRoute (
     {loggedIn,
@@ -17,7 +17,7 @@ function ProtectedRoute (
     firstIterationMovies,
     onToolButtonClick,
     isPreloaderOpen,
-    onFailUpdate
+    onFailUpdate,
   }
   ) {
 
@@ -63,7 +63,7 @@ function ProtectedRoute (
           />
         </Route>
       </Switch>
-    : <Login onLogin={onLogin} onSignOut={onSignOut}/>
+    : <Main loggedIn={loggedIn}/>
 )
 };
 

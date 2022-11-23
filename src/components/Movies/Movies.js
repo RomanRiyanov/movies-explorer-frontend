@@ -8,7 +8,7 @@ import Preloader from '../Preloader/Preloader.js';
 function Movies({
     movies, 
     onMoviesFind, 
-    keyword, 
+    keyword,
     onSaveMovie, 
     onDeleteMovie, 
     onMountAllSavedMovies, 
@@ -19,25 +19,30 @@ function Movies({
 }) {
     const [isShort, setIsShort] = useState(false);
 
-    function isFilmShort (checkBoxSelected) {
-        setIsShort(checkBoxSelected);
-        localStorage.setItem('localStorageShort', checkBoxSelected)
+    function onFilmShort () {
+        setIsShort((state) => !state);
+        localStorage.setItem('localStorageShort', !isShort)
     }
     
+    useEffect(() => {
+        setIsShort(localStorage.getItem('localStorageShort') === 'true');
+      }, [])
+
     return (
         <section className="movies__route">
         <Header onToolButtonClick={onToolButtonClick} loggedIn={loggedIn}/>
             <main className="movies__container">
                 <SearchForm 
                     onMoviesFind={onMoviesFind} 
-                    onShortFolmSelect={isFilmShort}
+                    onShortFolmSelect={onFilmShort}
+                    short={isShort}
                 />
                 {isPreloaderOpen ? 
                     <Preloader /> :
 
                     <MoviesCardList 
                         movies={movies} 
-                        keyword={keyword} 
+                        keyword={keyword}
                         short={isShort} 
                         onSaveMovie={onSaveMovie} 
                         onDeleteMovie={onDeleteMovie} 

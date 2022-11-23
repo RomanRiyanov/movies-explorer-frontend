@@ -4,8 +4,9 @@ import { Formik, Field, Form } from 'formik';
 import * as yup from 'yup';
 
 import { Link } from 'react-router-dom';
+import Main from "../Main/Main";
 
-function Login({onLogin, onSignOut}) {
+function Login({onLogin, onSignOut, loggedIn}) {
 
     function signOut() {
         console.log('Переход в регистрацию');
@@ -25,6 +26,9 @@ function Login({onLogin, onSignOut}) {
     }
 
     return (
+        loggedIn ?
+        <Main loggedIn={loggedIn}/>
+        :
         <section className="register">
             <div className="regiter__header">
                 <a href="main"> 

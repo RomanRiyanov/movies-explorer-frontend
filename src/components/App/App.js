@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useR} from "react";
 
 import {
   Route,
   Switch,
   Redirect,
-  useHistory
+  useHistory,
+  useRouteMatch
 } from 'react-router-dom';
 
 import { CurrentUserContext } from '../context/CurrentUserContext';
@@ -25,6 +26,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({
     name: "",
     email: "",
+    id: ""
   });
 
   const [isFileLoading, setIsFileloading] = useState(false);
@@ -37,8 +39,13 @@ function App() {
 
   const [movies, setMovies] = useState([]);
   const [keyword, setKeyword] = useState('');
+  // const [keywordSavedMovies, setKeywordSavedMovies] = useState('');
   const [firstIterationMovies, setFirstIterationMovies] = useState([]);
 
+  // const isMoviesPage = useRouteMatch({
+  //   path: "/movies",
+  //   strict: true,
+  // });
   let history = useHistory();
 
   function openToolPopup() {
@@ -51,19 +58,21 @@ function App() {
   }
 
   function handleGetMovies (keywordFromSearch) {
-    setKeyword(keywordFromSearch);
-    setIsLoading(true);
+    // if (isMoviesPage) {
+      setKeyword(keywordFromSearch)
+    // }
+    // else setKeywordSavedMovies(keywordFromSearch);
 
-    moviesApi.getMovies()
-      .then((moviesData) => {
-        setMovies(moviesData);
-        setIsLoading(false);
 
-      })
-      .catch(err => {
-        console.log('Ошибка ' + err)
-      })
-      .finally(() => setIsLoading(false))
+  //  moviesApi.getMovies()
+  //       .then((moviesData) => {
+  //         setMovies(moviesData);
+  //         setIsLoading(false);
+
+  //       })
+  //       .catch(err => {
+  //         console.log('Ошибка ' + err)
+  //       })
   }
 
   function onRegister({ name, email, password }) {
@@ -108,8 +117,10 @@ function App() {
     return mainApi.signOut()
       .then((res) => {
         if (res) {
-            setLoggedIn(false);
             localStorage.clear();
+            history.push('/');
+            setLoggedIn(false);
+            setKeyword('');
             return res;
         }
       })
@@ -148,6 +159,7 @@ function App() {
         }
       })
       .catch(err => {
+        onSignOut();
         console.log(`Ошибка при создании фильма ${err}`);
       }); 
   }
@@ -163,6 +175,18 @@ function App() {
         console.log(`Ошибка при удалении фильма ${err}`);
       }); 
   }
+
+  useEffect(() => {
+    setIsFileloading(true);
+    moviesApi.getMovies()
+    .then((moviesData) => {
+      setMovies(moviesData);
+    })
+    .catch(err => {
+      console.log('Ошибка ' + err)
+    })
+    .finally(() => {setIsFileloading(false);})
+  }, [])
 
   useEffect(() => {
     setIsFileloading(true);
@@ -187,14 +211,18 @@ function tokenCheck () {
 
         setCurrentUser({
           name: userData.name,
-          email: userData.email
+          email: userData.email,
+          id: userData._id
         })        
       })
     .catch(err => {
+      onSignOut();
       console.log(err)
     })
-    .finally(() => {setIsFileloading(false);})
+    .finally(() => {setIsFileloading(false);
+    })
 }
+
 
 useEffect(() => {        
   tokenCheck();
@@ -213,11 +241,11 @@ if (isFileLoading)
           </Route>
 
           <Route path='/signup'>
-            <Register onRegister={onRegister}/>
+            <Register onRegister={onRegister} loggedIn={loggedIn}/>
           </Route>
 
           <Route path='/signin'>
-            <Login onLogin={onLogin} onSignOut={onSignOut}/>
+            <Login onLogin={onLogin} onSignOut={onSignOut} loggedIn={loggedIn}/>
           </Route>
 
           <Route path='/main'>
@@ -231,6 +259,7 @@ if (isFileLoading)
               moviesData={movies}
               onMoviesFind={handleGetMovies}
               keyword={keyword}
+              // keywordSavedMovies={keywordSavedMovies}
               onLogin={onLogin}
               onSignOut={onSignOut}
               updateUser={onUpdateUser}

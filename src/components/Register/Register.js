@@ -6,8 +6,9 @@ import * as yup from 'yup';
 import {
     Link,
   } from 'react-router-dom';
+import Main from "../Main/Main";
 
-function Register({onRegister}) {
+function Register({onRegister, loggedIn}) {
     
     function signOut() {
         console.log('Войти в логин')
@@ -26,6 +27,9 @@ function Register({onRegister}) {
     }
 
     return (
+        loggedIn ?
+        <Main loggedIn={loggedIn}/>
+        :
         <section className="register">
             <div className="regiter__header">
                 <a href="main"> 

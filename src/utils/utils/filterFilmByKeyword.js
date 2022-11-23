@@ -1,4 +1,7 @@
+import { shortMovieLength } from "../constants/constants";
+
 export const filterFilmByKeyword = (movies, keyword, short) => {
+    // if (keyword)
     const trimmedKeyword = keyword.trim();
 
     if (trimmedKeyword.toLowerCase() === 'все' ||
@@ -26,7 +29,7 @@ export const filterFilmByKeyword = (movies, keyword, short) => {
         const resultMovies =  Array.from(uniqueMovies);
         if (short) {
             const shortResult = resultMovies.filter((movie) => {
-                return movie.duration <= 40
+                return movie.duration <= shortMovieLength
             });
             return shortResult;
         }

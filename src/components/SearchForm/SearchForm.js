@@ -7,6 +7,7 @@ function SearchForm({
   onMoviesFind, 
   onShortFolmSelect,
   localStorageKeyword,
+  short
 }) {
 
   const [keyword, setKeyword] = useState('');
@@ -43,10 +44,10 @@ function SearchForm({
         <form onSubmit={onSubmit} className="searchForm__form">
             <div className='searchForm__container'>
                 <input onChange={event => { searchFormValidation(event.target.value); setKeyword(event.target.value)} } className="searchForm__input" value={keyword} placeholder='Фильм'/>
-                <span className={keyword__error}>Нужно ввести ключевое слово</span>
+                <span className={keyword__error}>Нужно ввести ключевые слова</span>
                 <button type="submit" aria-label='Поиск' disabled={!isInputValid} className={searchForm__submitButton}></button>
             </div>
-            <FilterCheckbox onShortFolmSelect={onShortFolmSelect}/>
+            <FilterCheckbox value={short} onShortFolmSelect={onShortFolmSelect}/>
             <div className='searchform__line'></div>
         </form>
     );

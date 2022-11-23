@@ -32,10 +32,6 @@ function MoviesCard({ movie, onSaveMovie, savedMovies}) {
         console.log('сохранить карточку с фильмом');
         return onSaveMovie(movie.id || movie.movieId);
     }
-
-    function handleImageClick() {
-        console.log('пириход на ютубчик');
-    }
     
     useEffect(() => {
         setDuration(hoursAndMinutes());
@@ -49,6 +45,7 @@ function MoviesCard({ movie, onSaveMovie, savedMovies}) {
         <section className='moviesCard'>
             <div className="moviesCard__container">
                 <div className='moviesCard__credits'>
+                    <span className="moviesCard__description">{movie.description}</span>
                     <h2 className='moviesCard__tittle'>{movie["nameRU"]}</h2>
                     <p className='moviesCard__duration'>{duration}</p>
                 </div>
@@ -61,7 +58,9 @@ function MoviesCard({ movie, onSaveMovie, savedMovies}) {
                     </Route>
                 </Switch>
             </div>
-            <img onClick={handleImageClick} src={imageSrcRoute} className='moviesCard__photo' alt='Кадр из фильма'/>
+            <a className="moviesCard__photo_container" target="_blank" rel="noopener noreferrer" href={movie.trailerLink}>
+                <img src={imageSrcRoute} className='moviesCard__photo' alt='Кадр из фильма'/>
+            </a>
         </section>
     );
   }
