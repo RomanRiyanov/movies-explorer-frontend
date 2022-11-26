@@ -9,6 +9,7 @@ function Movies({
     movies, 
     onMoviesFind, 
     keyword,
+    keywordSavedMovies,
     onSaveMovie, 
     onDeleteMovie, 
     onMountAllSavedMovies, 
@@ -43,6 +44,7 @@ function Movies({
                     <MoviesCardList 
                         movies={movies} 
                         keyword={keyword}
+                        keywordSavedMovies={keywordSavedMovies}
                         short={isShort} 
                         onSaveMovie={onSaveMovie} 
                         onDeleteMovie={onDeleteMovie} 

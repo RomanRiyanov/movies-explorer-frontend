@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from "react";
+import React, {useEffect, useState, useContext, useMemo} from "react";
 import { Route, Switch } from 'react-router-dom';
 
 import MoviesCard from '../MoviesCard/MoviesCard.js';
@@ -9,7 +9,8 @@ import { addedFilmCounter } from "../../utils/utils/addedFilmCounter.js";
 
 function MoviesCardList({
     movies, 
-    keyword, 
+    keyword,
+    keywordSavedMovies,
     short, 
     onSaveMovie, 
     onDeleteMovie, 
@@ -17,10 +18,12 @@ function MoviesCardList({
 }) {
 
     const currentUser = useContext(CurrentUserContext);
-
+    
     const [width, setWidth] = useState(window.innerWidth);
     const [count, setCount] = useState(0);
-    const [savedMovies, setSavedMovies] = useState([]);
+    const [keywordSavedMoviesState, setKeywordSavedMoviesState] = useState('');
+
+    const savedMovies = useMemo(() => firstIterationMovies.filter(item => item.owner === currentUser.id), [firstIterationMovies, currentUser])
     
     const [filteredMoviesLength, setFilteredMoviesLength] = useState(0);
     const [isMoreButtonDisabled, setMoreButtonDisabled] = useState(false);
@@ -30,9 +33,9 @@ function MoviesCardList({
     const keywordMovies = filterFilmByKeyword(movies, keyword, short);
     const filteredMovies = filterFilmsByScreenWidth(keywordMovies, width, count);
 
-    const keywordSavedMoviesArr = filterFilmByKeyword(savedMovies, keyword, short);
-    const filteredSavedMovies = filterFilmsByScreenWidth(keywordSavedMoviesArr, width, count); 
-    
+    const keywordSavedMoviesArr = filterFilmByKeyword(savedMovies, keywordSavedMoviesState, short);
+    const filteredSavedMovies = filterFilmsByScreenWidth(keywordSavedMoviesArr, width, count);
+
     function moreFilmsHandle () {
         const num = addedFilmCounter(width);
         setCount(count + num);
@@ -43,28 +46,8 @@ function MoviesCardList({
         const filmSaved = savedMovies.find(elem => (elem.movieId ?? elem.id) === movieId);
         
         if (!filmSaved) {
-            onSaveMovie(film)
-                .then((res) => {
-                    if (res) {
-                        setSavedMovies(state => [...state, film]);
-                        console.log('фильм сохранен на сервер');
-                        return res;
-                    } throw new Error();
-                })
-                .catch(err => {
-                    console.log('Ошибка при сохранении фильма ' + err);
-                });
-            } 
-        else onDeleteMovie(movieId)
-                .then((res) => {
-                    if (res) {
-                        setSavedMovies(state => {return state.filter((item) => (item.movieId ?? item.id) !== movieId)});
-                        return res;
-                    } throw new Error();
-                })
-                .catch(err => {
-                    console.log('Ошибка при удалении фильма ' + err);
-                });
+            onSaveMovie(film);
+        } else onDeleteMovie(movieId);
     }
 
     useEffect(() => {
@@ -83,17 +66,16 @@ function MoviesCardList({
         } else if (keywordMovies.length !== filteredMoviesLength) {
             setMoreButtonDisabled(false)
         };
-    }, [keywordMovies, filteredMovies, filteredMoviesLength])
+    }, [keywordMovies, filteredMovies, filteredMoviesLength]);
 
     useEffect(() => {
-        const onlyCurrentUserMovies = firstIterationMovies.filter(item => item.owner === currentUser.id);
-        setSavedMovies(onlyCurrentUserMovies);
-    }, [])
+        setKeywordSavedMoviesState(keywordSavedMovies);
+    }, [keywordSavedMovies]);
 
-    // useEffect(() => {
-    //     setKeywordMoviesState([]);
-    // }, )
-
+    useEffect(() => {
+        setKeywordSavedMoviesState('');
+    }, []);
+  
     return (
         <section className='moviesCardList'>
             <Switch>

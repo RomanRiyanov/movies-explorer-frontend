@@ -1,11 +1,10 @@
-import React, {useEffect, useState, useR} from "react";
+import React, {useEffect, useState} from "react";
 
 import {
   Route,
   Switch,
   Redirect,
   useHistory,
-  useRouteMatch
 } from 'react-router-dom';
 
 import { CurrentUserContext } from '../context/CurrentUserContext';
@@ -39,13 +38,9 @@ function App() {
 
   const [movies, setMovies] = useState([]);
   const [keyword, setKeyword] = useState('');
-  // const [keywordSavedMovies, setKeywordSavedMovies] = useState('');
+  const [keywordSavedMovies, setKeywordSavedMovies] = useState('');
   const [firstIterationMovies, setFirstIterationMovies] = useState([]);
 
-  // const isMoviesPage = useRouteMatch({
-  //   path: "/movies",
-  //   strict: true,
-  // });
   let history = useHistory();
 
   function openToolPopup() {
@@ -58,25 +53,14 @@ function App() {
   }
 
   function handleGetMovies (keywordFromSearch) {
-    // if (isMoviesPage) {
-      setKeyword(keywordFromSearch)
-    // }
-    // else setKeywordSavedMovies(keywordFromSearch);
+    setKeyword(keywordFromSearch);
+  }
 
-
-  //  moviesApi.getMovies()
-  //       .then((moviesData) => {
-  //         setMovies(moviesData);
-  //         setIsLoading(false);
-
-  //       })
-  //       .catch(err => {
-  //         console.log('Ошибка ' + err)
-  //       })
+  function handleGetSavedMovies (keywordFromSearch) {
+    setKeywordSavedMovies(keywordFromSearch);
   }
 
   function onRegister({ name, email, password }) {
-    console.log('зарегистрироваться');
 
     return mainApi.register({ name, email, password })
       .then((res) => {
@@ -114,6 +98,7 @@ function App() {
   };
 
   function onSignOut(){
+
     return mainApi.signOut()
       .then((res) => {
         if (res) {
@@ -121,10 +106,15 @@ function App() {
             history.push('/');
             setLoggedIn(false);
             setKeyword('');
+            setKeywordSavedMovies('');
             return res;
         }
       })
       .catch(err => {
+          localStorage.clear();
+          setLoggedIn(false);
+          setKeyword('');
+          setKeywordSavedMovies('');
           console.log(`Ошибка при выходе из профиля ${err}`);
       });
   }
@@ -155,6 +145,7 @@ function App() {
     return mainApi.createMovie(movie)
       .then((res) => {
         if (res) {
+          setFirstIterationMovies((state) => [...state, res])
           return res;
         }
       })
@@ -168,45 +159,61 @@ function App() {
     return mainApi.deleteMovie(deletedMovieId)
       .then((res) => {
         if (res) {
+          setFirstIterationMovies(state => {return state.filter((item) => (item.movieId ?? item.id) !== deletedMovieId)});
+
           return res;
         }
       })
       .catch(err => {
+        onSignOut();
         console.log(`Ошибка при удалении фильма ${err}`);
       }); 
   }
 
   useEffect(() => {
-    setIsFileloading(true);
-    moviesApi.getMovies()
-    .then((moviesData) => {
-      setMovies(moviesData);
-    })
-    .catch(err => {
-      console.log('Ошибка ' + err)
-    })
-    .finally(() => {setIsFileloading(false);})
+      setIsFileloading(true);
+      if (localStorage.getItem('localStorageMovies')) {
+        setMovies(JSON.parse(localStorage.getItem('localStorageMovies')));
+        setIsFileloading(false);
+        return;
+      }
+      else {
+        moviesApi.getMovies()
+          .then((moviesData) => {
+            localStorage.setItem('localStorageMovies', JSON.stringify(moviesData));
+            setMovies(moviesData);
+          })
+          .catch(err => {
+            console.log('Ошибка ' + err)
+          })
+          .finally(() => {
+            setIsFileloading(false);
+          })
+      }
   }, [])
 
-  useEffect(() => {
+useEffect(() => {
+  if( loggedIn) {
     setIsFileloading(true);
-    mainApi.getMovies()
-      .then(res => {
-        setFirstIterationMovies(res);
-      })
-      .catch(err => console.log(err))
-      .finally(() => {setIsFileloading(false);})
-  }, [])
-
     
+    mainApi.getMovies()
+    .then(res => {
+      setFirstIterationMovies(res);
+    })
+    .catch(err => console.log(err))
+    .finally(() => {setIsFileloading(false);})
+  }
+}, [loggedIn])
+
 function tokenCheck () {
   setIsFileloading(true);
 
   mainApi.getUserInfo()
     .then(userData => {
       if (!userData) {
+        localStorage.clear();
         throw new Error ('Неверный email или пароль');
-    }
+      }
         setLoggedIn(true);
 
         setCurrentUser({
@@ -222,7 +229,6 @@ function tokenCheck () {
     .finally(() => {setIsFileloading(false);
     })
 }
-
 
 useEffect(() => {        
   tokenCheck();
@@ -258,8 +264,9 @@ if (isFileLoading)
               loggedIn={loggedIn}
               moviesData={movies}
               onMoviesFind={handleGetMovies}
+              onSavedMoviesFind={handleGetSavedMovies}
               keyword={keyword}
-              // keywordSavedMovies={keywordSavedMovies}
+              keywordSavedMovies={keywordSavedMovies}
               onLogin={onLogin}
               onSignOut={onSignOut}
               updateUser={onUpdateUser}

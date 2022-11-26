@@ -101,8 +101,8 @@ class MainApi {
 }
 
 const MainApiConfig = {
-    baseUrl: 'https://api.roman.diploma.nomoredomains.icu',
-    // baseUrl: 'http://localhost:3000',
+    // baseUrl: 'https://api.roman.diploma.nomoredomains.icu',
+    baseUrl: 'http://localhost:3000',
     moviesUrl: 'https://api.nomoreparties.co',
     headers: {
         'Content-Type': 'application/json'

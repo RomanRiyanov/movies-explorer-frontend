@@ -52,7 +52,7 @@ function Login({onLogin, onSignOut, loggedIn}) {
                     handleLogin(values, setSubmitting);
                 }}
             >
-            {({ errors, touched, values, isSubmitting, isValid, handleChange }) => (
+            {({ errors, touched, values, dirty, isValid, handleChange }) => (
                 <Form className="register__form">
                     <label className="register__text" htmlFor='email_input'>E-mail</label>
                     <Field 
@@ -77,7 +77,7 @@ function Login({onLogin, onSignOut, loggedIn}) {
                         >
                     </Field>
                     {errors.password && touched.password ? <p className='register__error register__error_secondInput' >{errors.password}</p> : null}
-                    <button type='submit' disabled={!isValid} className={isValid ? 'register__button register__button_type_login' : 'register__button_disabled register__button register__button_type_login'}>Войти</button>
+                    <button type='submit' disabled={!(isValid && dirty)} className={(isValid && dirty) ? 'register__button register__button_type_login' : 'register__button_disabled register__button register__button_type_login'}>Войти</button>
                     <div className="register__nav">
                         <p className="register__link">Ещё не зарегистрированы?</p>
                         <Link onClick={signOut} className='register__link register__link_blue' to='/signup'>Регистрация</Link>

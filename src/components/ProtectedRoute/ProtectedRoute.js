@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Movies from "../Movies/Movies";
+import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Main from "../Main/Main";
 
@@ -8,7 +9,9 @@ function ProtectedRoute (
     {loggedIn,
     moviesData,
     onMoviesFind,
+    onSavedMoviesFind,
     keyword,
+    keywordSavedMovies,
     onSignOut,
     onLogin,
     updateUser,
@@ -30,6 +33,7 @@ function ProtectedRoute (
             movies={moviesData}
             onMoviesFind={onMoviesFind}
             keyword={keyword}
+            keywordSavedMovies={keywordSavedMovies}
             onSaveMovie={onSaveMovie}
             onDeleteMovie={onDeleteMovie}
             firstIterationMovies={firstIterationMovies}
@@ -39,11 +43,12 @@ function ProtectedRoute (
         </Route>
 
         <Route exact path="/saved-movies"> 
-          <Movies
+          <SavedMovies
             loggedIn={loggedIn}
             movies={moviesData}
-            onMoviesFind={onMoviesFind}
+            onMoviesFind={onSavedMoviesFind}
             keyword={keyword}
+            keywordSavedMovies={keywordSavedMovies}
             onSaveMovie={onSaveMovie}
             onDeleteMovie={onDeleteMovie}
             firstIterationMovies={firstIterationMovies}

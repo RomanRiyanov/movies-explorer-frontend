@@ -85,3 +85,11 @@
         padding: 80px 30px 10px 30px;
     }
 }
+
+@media (max-width: 767px) {
+    .keyword_error {
+        font-size: 11px;
+        top: 60px;
+
+    }
+}

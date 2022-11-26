@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Formik, Field, Form } from 'formik';
-import * as yup from 'yup';
+import { useRouteMatch } from 'react-router-dom';
 
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox.js'
 function SearchForm({
@@ -9,6 +8,11 @@ function SearchForm({
   localStorageKeyword,
   short
 }) {
+
+  const isMoviesPage = useRouteMatch({
+    path: "/movies",
+    strict: true,
+  });
 
   const [keyword, setKeyword] = useState('');
   const [isInputValid, setIsInputValid] = useState(false);
@@ -26,17 +30,22 @@ function SearchForm({
   function onSubmit(event){
     event.preventDefault();
     if (isInputValid) {
-      localStorage.setItem('localStorageKeyword', keyword)
-      onMoviesFind(keyword);
+      if (isMoviesPage) {
+        localStorage.setItem('localStorageKeyword', keyword)
+        onMoviesFind(keyword);
+      }
+      else {
+        onMoviesFind(keyword);
+      }
     }
-    else setIsInputValid(false);    
+    else setIsInputValid(false); 
   }
 
   useEffect(() => {
-    if (localStorage.getItem('localStorageKeyword')) {
+    if (isMoviesPage && localStorage.getItem('localStorageKeyword')) {
       setKeyword(localStorage.getItem('localStorageKeyword'));
       onMoviesFind(localStorage.getItem('localStorageKeyword'));
-      searchFormValidation (localStorage.getItem('localStorageKeyword'));
+      searchFormValidation(localStorage.getItem('localStorageKeyword'));
     };
   }, [])
 

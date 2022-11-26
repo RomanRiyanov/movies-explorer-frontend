@@ -59,7 +59,7 @@ function Register({onRegister, loggedIn}) {
                     handleRegister(values, setSubmitting);
                 }}
             >
-            {({ errors, touched, values, isSubmitting, isValid, handleChange }) => (
+            {({ errors, touched, values, dirty, isValid, handleChange }) => (
                 <Form className="register__form">
                     <label className="register__text" htmlFor='name_input'>Имя</label>
                     <Field 
@@ -96,7 +96,7 @@ function Register({onRegister, loggedIn}) {
                     >
                     </Field>
                     {errors.password && touched.password ? <p className='register__error register__error_thirdInput' >{errors.password}</p> : null}
-                    <button type='submit' disabled={!isValid} className={isValid ? 'register__button' : 'register__button_disabled register__button'}>Зарегистироваться</button>
+                    <button type='submit' disabled={!(isValid && dirty)} className={(isValid && dirty) ? 'register__button' : 'register__button_disabled register__button'}>Зарегистироваться</button>
                     <div className="register__nav">
                         <p className="register__link">Уже зарегистрированы?</p>
                         <Link onClick={signOut} className='register__link register__link_blue' to='/signin'>Войти</Link>
