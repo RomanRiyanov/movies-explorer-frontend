@@ -1,17 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
-function FilterCheckbox() {
-
-const [isChecked, setIsChecked] = useState(false);
-
-function onSwitchCheckbox() {
-    setIsChecked(!isChecked)
-};
+function FilterCheckbox({onShortFolmSelect, value}) {
 
 return (
       <section className="checkbox_custom">
-        <div className="checkbox__container" onClick={onSwitchCheckbox}>
-          <div className={`checkbox__switch ${isChecked ? "isChecked" : ""}`}></div>
+        <div className="checkbox__container" onClick={onShortFolmSelect}>
+          <div className={`checkbox__switch ${value ? "isChecked" : ""}`}></div>
         </div>
         <p className='checkbox__label'>Короткометражки</p>
       </section>

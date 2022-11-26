@@ -1,28 +1,34 @@
-import React, {useEffect, useState, useContext} from "react";
+import React from "react";
 import headerLogoPath from '../../images/headerLogo.svg';
-import {CurrentUserContext} from '../context/CurrentUserContext';
 import { Formik, Field, Form } from 'formik';
+import * as yup from 'yup';
 
-import {
-    Route,
-    Switch,
-    Link,
-  } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Main from "../Main/Main";
 
-function Login({onLogin}) {
-
-    const currentUser = useContext(CurrentUserContext);
+function Login({onLogin, onSignOut, loggedIn}) {
 
     function signOut() {
-        console.log('Переход в регистрацию')
+        console.log('Переход в регистрацию');
+        onSignOut();
     };
 
-    function handleLogin() {
-        // event.preventDefault();
-        onLogin();
+    function handleLogin(values, setSubmitting) {
+
+        onLogin(values)
+        .then(() => {
+            return;
+          })
+          .catch(err => {
+            console.log('Ошибка при авторизации ' + err);
+          })
+          .finally(() => setSubmitting(false))
     }
 
     return (
+        loggedIn ?
+        <Main loggedIn={loggedIn}/>
+        :
         <section className="register">
             <div className="regiter__header">
                 <a href="main"> 
@@ -31,22 +37,53 @@ function Login({onLogin}) {
                 <h2 className="register__tittle">Рады видеть!</h2>
             </div>
             <Formik 
-            initialValues={{
-                email_input: '',
-                pass_input: ''
-              }}
-            onSubmit={handleLogin}>
+                initialValues={{
+                    email: '',
+                    password: ''
+                }}
+                validationSchema={yup.object().shape({
+                    email: yup.string()
+                        .email('Значение email введено некорректно')
+                        .required('Необходимо ввести email'),
+                    password: yup.string()
+                        .required('Необходимо ввести пароль'),
+                })}
+                onSubmit={(values, { setSubmitting }) => {
+                    handleLogin(values, setSubmitting);
+                }}
+            >
+            {({ errors, touched, values, dirty, isValid, handleChange }) => (
                 <Form className="register__form">
                     <label className="register__text" htmlFor='email_input'>E-mail</label>
-                    <Field className="register__input" type='email' id='email_input' name='email_input' placeholder={'yenail@mail.com'} required></Field>
+                    <Field 
+                        className="register__input"
+                        onChange={handleChange} 
+                        id='email_input' 
+                        name='email' 
+                        placeholder={'Введите email'}
+                        value={values.email}
+                        >
+                    </Field>
+                    {errors.email && touched.email ? <p className='register__error register__error_firsInput'>{errors.email}</p> : null}
                     <label className="register__text" htmlFor='pass_input'>Пароль</label>
-                    <Field className="register__input" type='password' id='pass_input' name='pass_input' required></Field>
-                    <button type='submit' className='register__button register__button_type_login'>Войти</button>
+                    <Field 
+                        className="register__input"
+                        onChange={handleChange} 
+                        type='password' 
+                        id='password_input' 
+                        name='password'
+                        placeholder={'Введите пароль'}
+                        value={values.password}
+                        >
+                    </Field>
+                    {errors.password && touched.password ? <p className='register__error register__error_secondInput' >{errors.password}</p> : null}
+                    <button type='submit' disabled={!(isValid && dirty)} className={(isValid && dirty) ? 'register__button register__button_type_login' : 'register__button_disabled register__button register__button_type_login'}>Войти</button>
                     <div className="register__nav">
                         <p className="register__link">Ещё не зарегистрированы?</p>
                         <Link onClick={signOut} className='register__link register__link_blue' to='/signup'>Регистрация</Link>
                     </div>
                 </Form>
+                )}
             </Formik>
         </section>
     );

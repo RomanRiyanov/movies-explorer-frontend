@@ -18,16 +18,16 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  margin-left: auto;
-  margin-right: 2px;
-  background: #2BE080;
+  margin-left: 2px;
+  margin-right: auto;
+  background: #F5F5F5;
   transition: all 0.5s ease;
 }
 
 .isChecked {
-  background: #F5F5F5;
+  background: #2BE080;
   transition: all 0.5s ease;
-  transform: translate(-16px, 0px);
+  transform: translate(16px, 0px);
 }
 
 .checkbox__label {

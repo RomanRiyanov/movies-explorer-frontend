@@ -12,6 +12,7 @@
     align-items: center;
     width: 100%;
     margin: 0 10px 28px 0;
+    position: relative;
 }
 
 .searchForm__input {
@@ -20,7 +21,7 @@
     width: 100%;
     height: 50px;
     margin-right: 10px;
-    padding-left: 10px;
+    padding-left: 30px;
     border: none;
     font-style: normal;
 
@@ -31,7 +32,6 @@
     font-size: 14px;
     line-height: 18px;
     color: #A0A0A0;
-    padding-left: 20px;
 }
 
 .searchForm__submitButton {
@@ -49,6 +49,13 @@
     cursor: pointer;
 }
 
+.searchForm__submitButton_disabled {
+    background: grey;
+    background-image: url(../../images/glass.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .searchForm__submitButton:hover {
     transition: all 0.5s ease;
     opacity: 0.8;
@@ -61,8 +68,28 @@
     margin: 40px 0 0;
 }
 
+.keyword_error {
+    color: #3456F3;
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 30px;
+}
+
+.keyword_error_visible {
+    display: block;
+}
+
 @media (max-width: 1023px) {
     .searchForm__form {
         padding: 80px 30px 10px 30px;
+    }
+}
+
+@media (max-width: 767px) {
+    .keyword_error {
+        font-size: 11px;
+        top: 60px;
+
     }
 }

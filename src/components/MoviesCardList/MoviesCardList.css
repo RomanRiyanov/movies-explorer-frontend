@@ -21,6 +21,7 @@
     margin: 0;
     padding-bottom: 30px;
     justify-content: center;
+    box-sizing: border-box;
 }
 
 .moviesCardList__moreMoviesButton {
@@ -41,6 +42,10 @@
 .moviesCardList__moreMoviesButton:hover {
     transition: all 0.5s ease;
     opacity: 0.4;
+}
+
+.button_inactive {
+    display: none;
 }
 
 @media (max-width: 1180px) {
